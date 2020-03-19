@@ -1,4 +1,4 @@
-package org.salem.controller.dto;
+package org.salem.controller.account.dto;
 
 public class AccountRequestDto {
 
@@ -12,12 +12,12 @@ public class AccountRequestDto {
     public AccountRequestDto() {
     }
 
-    public AccountRequestDto(String email, String password, String firstName, String lastName, String telephoneNumber,
+    public AccountRequestDto(String firstName, String lastName, String password, String email, String telephoneNumber,
             String role) {
-        this.email = email;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
+        this.email = email;
         this.telephoneNumber = telephoneNumber;
         this.role = role;
     }

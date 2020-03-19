@@ -1,4 +1,4 @@
-package org.salem.controller;
+package org.salem.controller.account;
 
 import org.springframework.stereotype.Component;
 
