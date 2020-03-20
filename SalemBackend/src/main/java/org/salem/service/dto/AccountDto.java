@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class AccountDto {
 
-    private Long accountId;
+    private String accountId;
 
     private String firstName;
 
@@ -31,11 +31,11 @@ public class AccountDto {
         this.roles = roles;
     }
 
-    public Long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

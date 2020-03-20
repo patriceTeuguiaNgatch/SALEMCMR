@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2>Account List</h2>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let accountDto of accountDtoList | async">
+                    <td>{{accountDto.firstName}}</td>
+                    <td>{{accountDto.lastName}}</td>
+                    <td>{{accountDto.email}}</td>
+                    <td><button (click)="deleteAccount(accountDto.accountId)" class="button is-info">Delete</button>
+                        <button (click)="accountInformations(accountDto.accountId)" class="button is-danger"
+                            style="margin-left: 10px">Detail</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+
+$$$$$$$  TODO $$$$$$$ 
+
+##### Tâche a faire en priorité
+1) faire le page d'acceuil de l'application
+2) creation d'un compte utilisateur
+
+    ### Back end
+    1)faire le creation d'un compte 
+
+    ### Frond end 
+    1) page d'acceuil avec lien vers la creation de compte
+    2) page de creation de compte
+
+    ### DB
+    1) creation de la db 
+    2) creation de lable pour stochage de account
+
+    ### Authentification 
+    
+$$$$$$$  IN PROGRESS $$$$$$$ 
+
+
+$$$$$$$  TESTING $$$$$$$ 
+
+
+$$$$$$$  DONE $$$$$$$ 
+

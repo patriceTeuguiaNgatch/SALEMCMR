@@ -1,0 +1,84 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Compiled class file
+*.class
+
+### Log file
+*.log
+**/test-launch.config
+
+### BlueJ files
+*.ctxt
+
+### Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+### Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.iml
+**/*.vsix
+
+### virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+**/.idea/
+**/node_modules/
+.DS_Store
+target/
+.classpath
+.project
+.settings
+**/.checkstyle
+target/
+bin/
+**/lib/
+out/
+server/
+
+jdtls/
+
+
+out
+node_modules
+*.vsix
+.vscode-test
+resources/templates/css/**
+resources/templates/js/**
+resources/templates/fonts/**
+dist
+.txt

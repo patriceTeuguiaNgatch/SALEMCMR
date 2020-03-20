@@ -18,7 +18,7 @@ public class AccountAssembler {
 
     public AccountDto create(Account account) {
         AccountDto accountDto = new AccountDto();
-        accountDto.setAccountId(account.getAccountId());
+        accountDto.setAccountId(account.getAccountId().toString());
         accountDto.setEmail(account.getEmail());
         accountDto.setFirstName(account.getFirstName());
         accountDto.setLastName(account.getLastName());
