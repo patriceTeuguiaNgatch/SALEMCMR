@@ -17,6 +17,7 @@ public class AccountAssembler {
     }
 
     public AccountDto create(Account account) {
+
         AccountDto accountDto = new AccountDto();
         accountDto.setAccountId(account.getAccountId().toString());
         accountDto.setEmail(account.getEmail());
@@ -26,22 +27,27 @@ public class AccountAssembler {
         accountDto.setTelephoneNumber(account.getTelephoneNumber());
         Set<String> roles = this.createListRole(account.getRoles());
         accountDto.setRoles(roles);
+
         return accountDto;
     }
 
     public List<AccountDto> createList(List<Account> accounts) {
+
         List<AccountDto> accountsListDtos = new ArrayList<>();
         for (Account account : accounts) {
             AccountDto accountDto = this.create(account);
             accountsListDtos.add(accountDto);
         }
+
         return accountsListDtos;
     }
 
     private Set<String> createListRole(Set<Role> roles) {
+
         Set<String> roleSet = new HashSet<>();
         for (Role role : roles)
             roleSet.add(role.getERole().toString());
+
         return roleSet;
     }
 }

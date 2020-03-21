@@ -9,7 +9,6 @@ import org.salem.controller.account.dto.AccountRequestDto;
 import org.salem.service.account.AccountService;
 import org.salem.service.dto.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/account")
 public class AccountController {
 
@@ -71,7 +69,7 @@ public class AccountController {
     @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<AccountDto> findAccountById(@PathVariable(value = "id") final Long accountId)
+    public ResponseEntity<AccountDto> findAccountById(@PathVariable(value = "id") final String accountId)
             throws Exception {
 
         LOGGER.info("Create the account : " + accountId + " : " + LOGGER.getName());
@@ -84,7 +82,7 @@ public class AccountController {
     @PutMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<AccountDto> updateAccount(@PathVariable(value = "id") final Long accountId,
+    public ResponseEntity<AccountDto> updateAccount(@PathVariable(value = "id") final String accountId,
             @RequestBody final AccountRequestDto accountRequestDto) throws Exception {
 
         LOGGER.info("Update the account : " + accountId + " : " + LOGGER.getName());
@@ -97,7 +95,7 @@ public class AccountController {
     @DeleteMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long accountId) throws Exception {
+    public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") String accountId) throws Exception {
 
         LOGGER.info("Delete the account : " + accountId + " : " + LOGGER.getName());
 

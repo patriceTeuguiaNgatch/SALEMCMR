@@ -8,6 +8,7 @@ import { AccountListComponent } from './account/account-list/account-list.compon
 import { AccountInformationsComponent } from './account/account-informations/account-informations.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { FooterComponent } from './componentReusable/footer/footer.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     CreateAccoutComponent,
     AccountListComponent,
-    AccountInformationsComponent
+    AccountInformationsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

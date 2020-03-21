@@ -15,20 +15,20 @@ export class AccountService {
     return this.http.get(`${this.baseUrl}/collection`);
   }
 
-  deleteAccount(id: number): Observable<any> {
+  deleteAccount(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, {
       responseType: 'text'
     });
   }
 
-  updateAccount(id: number, value: any): Observable<Object> {
+  updateAccount(id: string, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
   createAccount(accountDto: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/subscriber/create`, accountDto);
   }
 
-  findAccountById(id: number): Observable<any> {
+  findAccountById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 

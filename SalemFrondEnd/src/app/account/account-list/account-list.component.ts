@@ -22,7 +22,7 @@ export class AccountListComponent implements OnInit {
     this.accountDtoList = this.accountService.findAccountList();
   }
 
-  deleteAccount(id: number) {
+  deleteAccount(id: string) {
     this.accountService.deleteAccount(id).subscribe(data => {
       console.log(data);
       this.reloadData();
@@ -30,7 +30,7 @@ export class AccountListComponent implements OnInit {
       error => console.log(error));
   }
 
-  accountInformations(id: number) {
+  accountInformations(id: string) {
     this.router.navigate(['informations', id]);
   }
 }

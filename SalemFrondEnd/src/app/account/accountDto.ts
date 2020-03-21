@@ -5,5 +5,5 @@ export class AccountDto {
     password: string;
     email: string;
     telephoneNumber: string;
-    role: string = "volunteer";
+    role: string = "subscriber";
 }
