@@ -9,6 +9,10 @@ import { AccountInformationsComponent } from './account/account-informations/acc
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './componentReusable/footer/footer.component';
+import { HeaderComponent } from './componentReusable/header/header.component';
+import { DonComponent } from './don/don.component';
+import { HomeComponent } from './home/home.component';
+import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 
 
 @NgModule({
@@ -17,7 +21,11 @@ import { FooterComponent } from './componentReusable/footer/footer.component';
     CreateAccoutComponent,
     AccountListComponent,
     AccountInformationsComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent,
+    DonComponent,
+    HomeComponent,
+    NoPageFoundComponent,
   ],
   imports: [
     BrowserModule,

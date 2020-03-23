@@ -1,24 +1,29 @@
 <footer class="footer tile is-parent notification has-background-info">
     <div class="tile is-child ">
-        <article class="has-text-centered is-size-1-mobile">
+        <div class="has-text-centered">
             <p class="has-text-weight-bold"> {{title}} </p>
-            <p class="">{{boitePostale}} {{town}} {{country}}</p>
-            <p class="">Télephone : {{telephonNumber1}}</p>
-        </article>
+            <p class=""><i class="icon fas fa-map-marked-alt fa-lg"></i> {{adresse}}</p>
+            <p class=""><i class="icon fas fa-phone-square fa-lg"></i> {{telephonNumber}}</p>
+        </div>
+    </div>
+    <div class=" tile is-child">
+        <div class="has-text-centered">
+            <p class="has-text-centered"><i class="icon fa-lg"></i>{{null}}</p>
+            <a class="has-text-centered" href={{email}}><i class="icon fas far fa-envelope fa-lg"></i> {{email}}</a>
+        </div>
+
     </div>
     <div class="tile is-child">
-    </div>
-    <div class="tile is-child">
-        <p class="has-text-centered is-size-1-mobile has-text-weight-bold">Suivez nous !</p>
+        <p class="has-text-centered  has-text-weight-bold">Suivez nous !</p>
         <div class="column has-text-centered">
-            <a class="icon" href="#"><i class="fab fa-facebook"></i></a>
-            <a class="icon" href="#"><i class="fab fa-twitter-square"></i></a>
-            <a class="icon" href="#"><i class="fab fa-linkedin"></i></a>
-            <a class="icon" href="#"><i class="fab fa-instagram"></i></a>
+            <a class="icon" href="#"><i class="fab fa-facebook fa-lg"></i></a>
+            <a class="icon" href="#"><i class="fab fa-twitter-square fa-lg"></i></a>
+            <a class="icon" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a class="icon" href="#"><i class="fab fa-instagram fa-lg"></i></a>
         </div>
     </div>
 </footer>
 
-<div class="tile is-child  has-text-centered is-size-1-mobile">
-    <p>Tous droits reservés @ Salem</p>
+<div class="tile is-child  has-text-centered">
+    <p>Tous droits reservés © Salem</p>
 </div>

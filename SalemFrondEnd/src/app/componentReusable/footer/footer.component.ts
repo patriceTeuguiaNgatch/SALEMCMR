@@ -7,12 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   title = 'Salem';
-  town = 'Douala';
-  country = 'Cameroun';
-  boitePostale = 'BP : XX '
-  telephonNumber1 = '(237) XXXXXXXXXXXXXX';
-  email = 'salem@getMaxListeners.com'
-
+  adresse = 'XX  Douala Cameroun'
+  telephonNumber = '(237)XXXXXXXXXXXX';
+  email = 'salem@gmail.com'
+  null = '';
   constructor() { }
 
   ngOnInit(): void {

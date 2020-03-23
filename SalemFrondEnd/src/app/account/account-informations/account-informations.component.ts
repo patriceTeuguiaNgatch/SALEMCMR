@@ -17,5 +17,4 @@ export class AccountInformationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
 }

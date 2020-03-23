@@ -1,29 +1,11 @@
 <div class="tile is-ancestor">
 
-  <div class="tile is-vertical">
+  <div class="tile is-vertical has-text-centered">
 
-    <div class="subtitle is-parent">
-      <article class="tile is-child notification is-info">
-        <p class="title">menu</p>
-      </article>
-    </div>
+    <app-header [isSignInValue]="isTrue" [isRegistrationValue]="isTrue"></app-header>
 
-    <section class="tile is-parent">
-      <div class="tile is-child notification is-warning hero">
-        <figure class="image hero-body">
-          <span class="icon hero-body is-pulled-right" (click)="onClickRight()"><i
-              class="fas fa-arrow-circle-right fa-3x "></i></span>
-          <span class="icon hero-body is-pulled-left" (click)="onClickLeft()"><i
-              class="fas fa-arrow-circle-left fa-3x"></i></span>
-          <img class="" src={{listImage[currentPositionImage]}} alt="Image d'acceuil">
-        </figure>
-      </div>
-    </section>
-
-    <app-footer></app-footer>
+    <router-outlet></router-outlet>
 
   </div>
 
 </div>
-
-<router-outlet></router-outlet>
