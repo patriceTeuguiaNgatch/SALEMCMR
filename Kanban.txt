@@ -11,6 +11,7 @@ $$$$$$$  TODO $$$$$$$
     ### Frond end 
     1) page d'acceuil avec lien vers la creation de compte
     2) page de creation de compte
+    3) page faire don
 
     ### DB
     1) creation de la db 

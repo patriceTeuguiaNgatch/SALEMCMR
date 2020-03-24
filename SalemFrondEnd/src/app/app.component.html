@@ -4,7 +4,11 @@
 
     <app-header [isSignInValue]="isTrue" [isRegistrationValue]="isTrue"></app-header>
 
-    <router-outlet></router-outlet>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
+    <app-footer></app-footer>
 
   </div>
 

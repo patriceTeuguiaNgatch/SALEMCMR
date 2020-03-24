@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-don',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DonComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToDonFinancier() {
+    this.router.navigate(['donFinancier'])
+  }
+
+  goToDonMateriel() {
+    this.router.navigate(['donMateriel'])
   }
 
 }

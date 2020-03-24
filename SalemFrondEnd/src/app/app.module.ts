@@ -13,6 +13,9 @@ import { HeaderComponent } from './componentReusable/header/header.component';
 import { DonComponent } from './don/don.component';
 import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
+import { DonInformationComponent } from './don-information/don-information.component';
+import { DonMaterielComponent } from './don-materiel/don-materiel.component';
+import { DonFinancierComponent } from './don-financier/don-financier.component';
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
     DonComponent,
     HomeComponent,
     NoPageFoundComponent,
+    DonInformationComponent,
+    DonMaterielComponent,
+    DonFinancierComponent,
   ],
   imports: [
     BrowserModule,
