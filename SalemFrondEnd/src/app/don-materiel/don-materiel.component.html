@@ -1,1 +1,135 @@
-<p>don-materiel works!</p>
+<div class="container box">
+    <div class="field">
+        <p class="subtitle"><strong class="has-text-primary">Je donne à SALEM</strong></p>
+    </div>
+
+    <div class="field">
+        <p class=""><strong class="has-text-primary">{{identification}}</strong></p>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{firstName}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{inputFirstName}}>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label has-text-left">{{lastName}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{inputLastName}}>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{email}}</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input is-danger" type="email" placeholder={{inputEmail}}>
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+        <p class="help is-danger">{{thisEmailIsInvalid}}</p>
+    </div>
+
+    <div class="field">
+        <p class=""><strong class="has-text-primary">{{adresse}}</strong></p>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{informationAdresse}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{numeroRueAppartement}}>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{town}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{inputTown}}>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{postalCode}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{inputPostalCode}}>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{country}}</label>
+        <div class="control">
+            <div class="select">
+                <select>
+                    <option *ngFor="let country of countryList; index as i">{{country}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{phoneNumber}}</label>
+        <div class="control">
+            <input class="input" type="text" placeholder={{inputPhoneNumber}}>
+        </div>
+    </div>
+
+    <div class="field">
+        <p class=""><strong class="has-text-primary">{{informationSurLeDon}}</strong></p>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{reason}}</label>
+        <div class="control">
+            <div class="select">
+                <select>
+                    <option *ngFor="let reason of reasonList; index as i">{{reason}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label has-text-left">{{comments}}</label>
+        <div class="control">
+            <textarea class="textarea" placeholder={{inputMessage}}></textarea>
+        </div>
+    </div>
+
+    <div class="field">
+        <p class=""><strong class="has-text-primary">{{confidentialite}}</strong></p>
+    </div>
+
+    <div class="field">
+        <p class="has-text-justified">En témoignage de reconnaissance, SALEM publie des listes de donateurs;</p>
+        <p class="has-text-justified"> si vous ne souhaitez pas que votre nom y paraisse, cochez ici.</p>
+        <div class="control">
+            <label class="checkbox">
+                <input type="checkbox">
+                Confidentialité demandée
+            </label>
+        </div>
+    </div>
+
+    <div class="field">
+        <p class=""><strong class="has-text-primary">{{property}}</strong></p>
+    </div>
+
+    <div class="field">
+        <p class="has-text-justified">Les contributions faites par la partie donatrice en vertu du présent engagement,
+        </p>
+        <p class="has-text-justified">constituent des dons. Elles deviennent ainsi la propriété de SALEM, dès leur
+        </p>
+        <p class="has-text-justified">encaissement celles-ci ne peuvent être remboursées ou retournées.
+        </p>
+
+    </div>
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-info">Soumettre</button>
+        </div>
+        <div class="control">
+            <button class="button is-danger">Annuler</button>
+        </div>
+    </div>
+</div>
