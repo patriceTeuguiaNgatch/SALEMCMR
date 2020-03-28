@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { DonMaterielComponent } from './don-materiel/don-materiel.component';
 import { DonFinancierComponent } from './don-financier/don-financier.component';
+import { RemerciementComponent } from './remerciement/remerciement.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path: 'donMateriel', component: DonMaterielComponent, data: { title: 'donation materiel' } },
   { path: 'donFinancier', component: DonFinancierComponent, data: { title: 'donation financier' } },
   { path: 'home', component: HomeComponent, data: { title: 'home page' } },
+  { path: 'remerciement', component: RemerciementComponent, data: { title: 'remerciement' } },
   { path: '**', component: NoPageFoundComponent, data: { title: 'no page found' } },
+
 
 ];
 

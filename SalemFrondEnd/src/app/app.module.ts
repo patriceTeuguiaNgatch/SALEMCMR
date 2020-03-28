@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { DonMaterielComponent } from './don-materiel/don-materiel.component';
 import { DonFinancierComponent } from './don-financier/don-financier.component';
+import { RemerciementComponent } from './remerciement/remerciement.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { DonFinancierComponent } from './don-financier/don-financier.component';
     NoPageFoundComponent,
     DonMaterielComponent,
     DonFinancierComponent,
+    RemerciementComponent,
   ],
   imports: [
     BrowserModule,

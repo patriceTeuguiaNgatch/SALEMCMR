@@ -36,10 +36,6 @@ export class DonMaterielComponent implements OnInit {
   property = 'Propriété';
 
 
-
-  countryNew = new Country("", "");
-
-
   isEmailInvalid = true;
   reasonList: any = ["Education des enfants", "Foire des livres",
     "Aide financiere aux demunis", "soutien morale ou phychologique"];
@@ -107,9 +103,6 @@ export class DonMaterielComponent implements OnInit {
     "Wake Island", "Wallis - et - Futuna", "Yémen", "Zambie", "Zimbabwe",
   ]
 
-  submitted = false;
-  cancel = false;
-
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -137,12 +130,12 @@ export class DonMaterielComponent implements OnInit {
 
   submit() {
     if (this.form.status === 'VALID') {
-      console.log(this.form.value);
+      this.router.navigate(['remerciement']);
     }
   }
 
   gotToDon() {
-    this.router.navigate(['don'])
+    this.router.navigate(['don']);
   }
 
 }
