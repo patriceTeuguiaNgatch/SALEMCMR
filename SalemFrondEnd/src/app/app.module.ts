@@ -7,7 +7,7 @@ import { CreateAccoutComponent } from './account/create-accout/create-accout.com
 import { AccountListComponent } from './account/account-list/account-list.component';
 import { AccountInformationsComponent } from './account/account-informations/account-informations.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './componentReusable/footer/footer.component';
 import { HeaderComponent } from './componentReusable/header/header.component';
 import { DonComponent } from './don/don.component';
@@ -35,7 +35,8 @@ import { DonFinancierComponent } from './don-financier/don-financier.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

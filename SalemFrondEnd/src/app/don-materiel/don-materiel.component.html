@@ -1,135 +1,170 @@
 <div class="container box">
-    <div class="field">
-        <p class="subtitle"><strong class="has-text-primary">Je donne à SALEM</strong></p>
-    </div>
-
-    <div class="field">
-        <p class=""><strong class="has-text-primary">{{identification}}</strong></p>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{firstName}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{inputFirstName}}>
+    <form [formGroup]="form">
+        <div class="field">
+            <p class="subtitle"><strong class="has-text-primary">Je donne à SALEM</strong></p>
         </div>
-    </div>
-    <div class="field">
-        <label class="label has-text-left">{{lastName}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{inputLastName}}>
+
+        <div class="field">
+            <p class="has-text-left help"> <strong class="has-text-danger">*</strong> Champ obligatoire</p>
+            <progress class="progress is-info is-small" value="100" max="100"></progress>
         </div>
-    </div>
 
-    <div class="field">
-        <label class="label has-text-left">{{email}}</label>
-        <div class="control has-icons-left has-icons-right">
-            <input class="input is-danger" type="email" placeholder={{inputEmail}}>
-            <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-            </span>
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{identification}}</strong></p>
         </div>
-        <p class="help is-danger">{{thisEmailIsInvalid}}</p>
-    </div>
 
-    <div class="field">
-        <p class=""><strong class="has-text-primary">{{adresse}}</strong></p>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{informationAdresse}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{numeroRueAppartement}}>
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{town}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{inputTown}}>
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{postalCode}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{inputPostalCode}}>
-        </div>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{country}}</label>
-        <div class="control">
-            <div class="select">
-                <select>
-                    <option *ngFor="let country of countryList; index as i">{{country}}</option>
-                </select>
+        <div class="field form-group">
+            <label class="label has-text-left" for="firstName"><strong class="has-text-danger">*</strong>
+                {{firstName}}</label>
+            <div class="control">
+                <input formControlName="firstName" class="input form-control" type="text" id="firstName"
+                    placeholder={{inputFirstName}}>
+            </div>
+            <div *ngIf="validation.firstName.touched && validation.firstName.invalid" class="help is-danger">
+                <div *ngIf="validation.firstName.errors.required">Le nom est requis</div>
             </div>
         </div>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{phoneNumber}}</label>
-        <div class="control">
-            <input class="input" type="text" placeholder={{inputPhoneNumber}}>
-        </div>
-    </div>
-
-    <div class="field">
-        <p class=""><strong class="has-text-primary">{{informationSurLeDon}}</strong></p>
-    </div>
-
-    <div class="field">
-        <label class="label has-text-left">{{reason}}</label>
-        <div class="control">
-            <div class="select">
-                <select>
-                    <option *ngFor="let reason of reasonList; index as i">{{reason}}</option>
-                </select>
+        <div class="field form-group">
+            <label class="label has-text-left" for="firstName"> <strong class="has-text-danger">*</strong>
+                {{lastName}}</label>
+            <div class="control">
+                <input formControlName="lastName" class="input form-control" type="text" id="lastName"
+                    placeholder={{inputLastName}}>
+            </div>
+            <div *ngIf="validation.lastName.touched && validation.lastName.invalid" class="help is-danger">
+                <div *ngIf="validation.lastName.errors.required">Le prenom est requis</div>
             </div>
         </div>
-    </div>
 
-    <div class="field">
-        <label class="label has-text-left">{{comments}}</label>
-        <div class="control">
-            <textarea class="textarea" placeholder={{inputMessage}}></textarea>
+        <div class="field form-group">
+            <label class="label has-text-left" type="email" for="email"> <strong class="has-text-danger">*</strong>
+                {{email}}</label>
+            <div class="control has-icons-left has-icons-right">
+                <input formControlName="email" id="email" class="input form-control" type="text"
+                    placeholder={{inputEmail}}>
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </div>
+            <div *ngIf="validation.email.touched && validation.email.invalid" class="help is-danger">
+                <p *ngIf="validation.email.errors.required">{{emailIsrequired}}</p>
+                <p *ngIf="validation.email.errors.email">{{thisEmailIsInvalid}}</p>
+            </div>
+
         </div>
-    </div>
 
-    <div class="field">
-        <p class=""><strong class="has-text-primary">{{confidentialite}}</strong></p>
-    </div>
-
-    <div class="field">
-        <p class="has-text-justified">En témoignage de reconnaissance, SALEM publie des listes de donateurs;</p>
-        <p class="has-text-justified"> si vous ne souhaitez pas que votre nom y paraisse, cochez ici.</p>
-        <div class="control">
-            <label class="checkbox">
-                <input type="checkbox">
-                Confidentialité demandée
-            </label>
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{adresse}}</strong></p>
         </div>
-    </div>
 
-    <div class="field">
-        <p class=""><strong class="has-text-primary">{{property}}</strong></p>
-    </div>
-
-    <div class="field">
-        <p class="has-text-justified">Les contributions faites par la partie donatrice en vertu du présent engagement,
-        </p>
-        <p class="has-text-justified">constituent des dons. Elles deviennent ainsi la propriété de SALEM, dès leur
-        </p>
-        <p class="has-text-justified">encaissement celles-ci ne peuvent être remboursées ou retournées.
-        </p>
-
-    </div>
-    <div class="field is-grouped">
-        <div class="control">
-            <button class="button is-info">Soumettre</button>
+        <div class="field">
+            <label class="label has-text-left">{{informationAdresse}}</label>
+            <div class="control">
+                <input formControlName="roadNumber" id="roadNumber" class="input form-control" type="text"
+                    placeholder={{numeroRueAppartement}}>
+            </div>
         </div>
-        <div class="control">
-            <button class="button is-danger">Annuler</button>
+
+        <div class="field">
+            <label class="label has-text-left">{{town}}</label>
+            <div class="control">
+                <input formControlName="town" id="town" class="input form-control" type="text"
+                    placeholder={{inputTown}}>
+            </div>
         </div>
-    </div>
+
+        <div class="field">
+            <label class="label has-text-left">{{postalCode}}</label>
+            <div class="control">
+                <input formControlName="postalCode" id="postalCode" class="input form-control" type="text"
+                    placeholder={{inputPostalCode}}>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left">{{country}} </label>
+            <div class="control">
+                <div class="select">
+                    <select formControlName="country" class="form-control" id="country">
+                        <option>Faite votre choix</option>
+                        <option *ngFor="let country of countryListNew;">{{country.name}}
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left">{{phoneNumber}}</label>
+            <div class="control">
+                <input formControlName="phoneNumber" id="phoneNumber" class="form-control" class="input" type="text">
+            </div>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{informationSurLeDon}}</strong></p>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left">{{reason}}</label>
+            <div class="control">
+                <div class="select">
+                    <select formControlName="kind" class=" form-control" id="kind">
+                        <option>Faite votre choix</option>
+                        <option *ngFor="let reason of reasonList; index as i">{{reason}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left form-control">{{comments}}</label>
+            <div class="control">
+                <textarea formControlName="comments" id="comments" class="textarea"
+                    placeholder={{inputMessage}}></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{confidentialite}}</strong></p>
+        </div>
+
+        <div class="field">
+            <p class="has-text-justified">En témoignage de reconnaissance, SALEM publie des listes de donateurs;</p>
+            <p class="has-text-justified"> si vous ne souhaitez pas que votre nom y paraisse, cochez ici.</p>
+            <div class="control">
+                <label class="checkbox">
+                    <input formControlName="isConfidentiale" id="isConfidentiale" type="checkbox">
+                    Confidentialité demandée
+                </label>
+            </div>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{property}}</strong></p>
+        </div>
+
+        <div class="field">
+            <p class="has-text-justified">Les contributions faites par la partie donatrice en vertu du présent
+                engagement,
+            </p>
+            <p class="has-text-justified">constituent des dons. Elles deviennent ainsi la propriété de SALEM, dès leur
+            </p>
+            <p class="has-text-justified">encaissement celles-ci ne peuvent être remboursées ou retournées.
+            </p>
+
+        </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-info" type="submit" (click)="submit()"
+                    [disabled]="!form.valid">Soumettre</button>
+            </div>
+            <div class="control">
+                <button class="button is-info is-outlined" (click)="gotToDon()">Précedent</button>
+            </div>
+        </div>
+
+    </form>
+
 </div>
