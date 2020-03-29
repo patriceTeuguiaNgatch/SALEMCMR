@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountDto } from '../accountDto';
+import { AccountDto } from '../../dto/accountDto';
 import { AccountService } from '../account.service';
 import { Router } from '@angular/router';
 

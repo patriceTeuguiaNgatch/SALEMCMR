@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountService } from '../account.service';
 import { RouterEvent, Router } from '@angular/router';
-import { AccountDto } from '../accountDto';
+import { AccountDto } from '../../dto/accountDto';
 
 @Component({
   selector: 'app-account-list',

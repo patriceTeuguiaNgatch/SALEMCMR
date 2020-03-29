@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Country } from '../dto/country';
+import { AccountDto } from '../dto/accountDto';
+import { DonDto } from '../dto/donDto';
+import { AccountService } from '../account/account.service';
 
 @Component({
   selector: 'app-don-materiel',
@@ -103,7 +106,10 @@ export class DonMaterielComponent implements OnInit {
     "Wake Island", "Wallis - et - Futuna", "Yémen", "Zambie", "Zimbabwe",
   ]
 
-  constructor(private router: Router) { }
+  accountDto: AccountDto = new AccountDto();
+  donMateriel: DonDto = new DonDto();
+
+  constructor(private accountService: AccountService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -119,7 +125,7 @@ export class DonMaterielComponent implements OnInit {
     phoneNumber: new FormControl(''),
     kind: new FormControl(''),
     comments: new FormControl(''),
-    isConfidentiale: new FormControl(''),
+    isConfidentiale: new FormControl(false),
 
   });
 
@@ -130,6 +136,30 @@ export class DonMaterielComponent implements OnInit {
 
   submit() {
     if (this.form.status === 'VALID') {
+      this.donMateriel.roadNumber = this.form.value.roadNumber;
+      this.donMateriel.town = this.form.value.town;
+      this.donMateriel.postalCode = this.form.value.postalCode;
+      this.donMateriel.country = this.form.value.country;
+      this.donMateriel.postalCode = this.form.value.postalCode;
+      this.donMateriel.phoneNumber = this.form.value.phoneNumber;
+      this.donMateriel.king = this.form.value.kind;
+      this.donMateriel.comments = this.form.value.comments;
+      this.donMateriel.isConfidential = this.form.value.isConfidential;
+
+      this.accountDto.firstName = this.form.value.firstName;
+      this.accountDto.lastName = this.form.value.lastName;
+      this.accountDto.password = "password";
+      this.accountDto.email = this.form.value.email;
+      this.accountDto.phoneNumber = this.form.value.firstName;
+      this.accountDto.donList[0] = this.donMateriel;
+
+      console.log(this.accountDto.donList);
+
+      this.accountService.createAccount(this.accountDto)
+        .subscribe(data => console.log(data),
+          error => console.log(error));
+      this.accountDto = new AccountDto();
+
       this.router.navigate(['remerciement']);
     }
   }

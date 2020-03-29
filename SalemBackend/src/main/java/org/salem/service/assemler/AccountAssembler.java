@@ -24,7 +24,7 @@ public class AccountAssembler {
         accountDto.setFirstName(account.getFirstName());
         accountDto.setLastName(account.getLastName());
         accountDto.setPassword(account.getPassword());
-        accountDto.setTelephoneNumber(account.getTelephoneNumber());
+        accountDto.setPhoneNumber(account.getPhoneNumber());
         Set<String> roles = this.createListRole(account.getRoles());
         accountDto.setRoles(roles);
 

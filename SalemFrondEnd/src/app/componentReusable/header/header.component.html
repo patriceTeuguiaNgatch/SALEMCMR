@@ -4,7 +4,9 @@
 <nav class="navbar is-info" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <p class="has-text-centered"><i class="icon fa-lg"></i>{{null}}</p>
-        <a class="navbar-item" href="#"><img class="" src="{{imageMenu}}" alt="Logo SALEM" width="112" height="30"></a>
+        <!-- <a class="navbar-item" href="#"><img class="" src="{{imageMenu}}" alt="Logo SALEM" width="112" height="30"></a> -->
+
+        <a class="navbar-item icon" href="#"><i class="fas fa-hand-holding-heart fas fa-3x has-text-primary"></i></a>
         <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
             data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
@@ -24,7 +26,7 @@
                 <div class="navbar-dropdown">
                     <a class="navbar-item">{{codeEthique}}</a>
                     <a class="navbar-item">{{mission}}</a>
-                    <a class="navbar-item">{{contact}}</a>
+                    <a class="navbar-item" routerLink="contact" routerLinkActive="active">{{contact}}</a>
                     <a class="navbar-item">{{information}}</a>
                     <hr class="navbar-divider">
                     <a class="navbar-item" routerLink="don" routerLinkActive="active">{{don}}</a>

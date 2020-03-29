@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SalemInformation } from '../domain/SalemInformation';
 
 @Component({
   selector: 'app-don',
@@ -7,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./don.component.css']
 })
 export class DonComponent implements OnInit {
+
+  salemInformation = new SalemInformation();
+  adresse = this.salemInformation.adresse;
 
   constructor(private router: Router) { }
 

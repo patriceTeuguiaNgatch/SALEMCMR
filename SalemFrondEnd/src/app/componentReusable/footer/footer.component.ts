@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SalemInformation } from 'src/app/domain/SalemInformation';
 
 @Component({
   selector: 'app-footer',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  title = 'Salem';
-  adresse = 'XX  Douala Cameroun'
-  telephonNumber = '(237)XXXXXXXXXXXX';
-  email = 'salem@gmail.com'
+
+  salemInformation = new SalemInformation();
+  title = this.salemInformation.title;
+  adresse = this.salemInformation.adresse;
+  phoneNumber = this.salemInformation.phonNumber;
+  email = this.salemInformation.email;
   null = '';
   constructor() { }
 

@@ -8,11 +8,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,23 +40,27 @@ public class Account implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "telephoneNumber")
-    private String telephoneNumber;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "accountId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles = new HashSet<>();
 
+    // @OneToMany(mappedBy = "accounts", fetch = FetchType.LAZY, cascade =
+    // CascadeType.ALL)
+    // private Set<Don> dons = new HashSet<>();
+
     public Account() {
     }
 
-    public Account(String firstName, String lastName, String password, String email, String telephoneNumber,
+    public Account(String firstName, String lastName, String password, String email, String phoneNumber,
             Set<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.telephoneNumber = telephoneNumber;
+        this.phoneNumber = phoneNumber;
         this.roles = roles;
     }
 
@@ -98,12 +104,12 @@ public class Account implements Serializable {
         this.email = email;
     }
 
-    public String getTelephoneNumber() {
-        return this.telephoneNumber;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<Role> getRoles() {
@@ -134,20 +140,20 @@ public class Account implements Serializable {
         Account account = (Account) o;
         return Objects.equals(accountId, account.accountId) && Objects.equals(firstName, account.firstName)
                 && Objects.equals(lastName, account.lastName) && Objects.equals(password, account.password)
-                && Objects.equals(email, account.email) && Objects.equals(telephoneNumber, account.telephoneNumber)
+                && Objects.equals(email, account.email) && Objects.equals(phoneNumber, account.phoneNumber)
                 && Objects.equals(roles, account.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountId, firstName, lastName, password, email, telephoneNumber, roles);
+        return Objects.hash(accountId, firstName, lastName, password, email, phoneNumber, roles);
     }
 
     @Override
     public String toString() {
         return "{" + " id='" + getAccountId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
                 + getLastName() + "'" + ", password='" + getPassword() + "'" + ", email='" + getEmail() + "'"
-                + ", telephoneNumber='" + getTelephoneNumber() + "'" + ", roles='" + getRoles() + "'" + "}";
+                + ", phoneNumber='" + getPhoneNumber() + "'" + ", roles='" + getRoles() + "'" + "}";
     }
 
 }

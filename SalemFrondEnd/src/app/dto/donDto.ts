@@ -3,6 +3,7 @@ export class DonDto {
     roadNumber: string;
     town: string;
     postalCode: string;
+    phoneNumber: string;
     country: string;
     king: string;
     comments: string

@@ -16,6 +16,7 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 import { DonMaterielComponent } from './don-materiel/don-materiel.component';
 import { DonFinancierComponent } from './don-financier/don-financier.component';
 import { RemerciementComponent } from './remerciement/remerciement.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { RemerciementComponent } from './remerciement/remerciement.component';
     DonMaterielComponent,
     DonFinancierComponent,
     RemerciementComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,

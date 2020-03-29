@@ -6,19 +6,19 @@ public class AccountRequestDto {
     private String password;
     private String firstName;
     private String lastName;
-    private String telephoneNumber;
+    private String phoneNumber;
     private String role;
 
     public AccountRequestDto() {
     }
 
-    public AccountRequestDto(String firstName, String lastName, String password, String email, String telephoneNumber,
+    public AccountRequestDto(String firstName, String lastName, String password, String email, String phoneNumber,
             String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.telephoneNumber = telephoneNumber;
+        this.phoneNumber = phoneNumber;
         this.role = role;
     }
 
@@ -54,12 +54,12 @@ public class AccountRequestDto {
         this.lastName = lastName;
     }
 
-    public String getTelephoneNumber() {
-        return this.telephoneNumber;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getRole() {
@@ -90,8 +90,8 @@ public class AccountRequestDto {
         return this;
     }
 
-    public AccountRequestDto telephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public AccountRequestDto telephoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
         return this;
     }
 
@@ -103,8 +103,8 @@ public class AccountRequestDto {
     @Override
     public String toString() {
         return "{" + " email='" + getEmail() + "'" + ", password='" + getPassword() + "'" + ", firstName='"
-                + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", telephoneNumber='"
-                + getTelephoneNumber() + "'" + ", role='" + getRole() + "'" + "}";
+                + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", phoneNumber='" + getPhoneNumber()
+                + "'" + ", role='" + getRole() + "'" + "}";
     }
 
 }

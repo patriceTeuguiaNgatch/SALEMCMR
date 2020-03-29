@@ -14,20 +14,20 @@ public class AccountDto {
 
     private String email;
 
-    private String telephoneNumber;
+    private String phoneNumber;
 
     private Set<String> roles;
 
     public AccountDto() {
     }
 
-    public AccountDto(String firstName, String lastName, String password, String email, String telephoneNumber,
+    public AccountDto(String firstName, String lastName, String password, String email, String phoneNumber,
             Set<String> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.telephoneNumber = telephoneNumber;
+        this.phoneNumber = phoneNumber;
         this.roles = roles;
     }
 
@@ -71,12 +71,12 @@ public class AccountDto {
         this.email = email;
     }
 
-    public String getTelephoneNumber() {
-        return this.telephoneNumber;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<String> getRoles() {
@@ -90,8 +90,8 @@ public class AccountDto {
     @Override
     public String toString() {
         return "{" + " firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", password='"
-                + getPassword() + "'" + ", email='" + getEmail() + "'" + ", telephoneNumber='" + getTelephoneNumber()
-                + "'" + ", roles='" + getRoles() + "'" + "}";
+                + getPassword() + "'" + ", email='" + getEmail() + "'" + ", phoneNumber='" + getPhoneNumber() + "'"
+                + ", roles='" + getRoles() + "'" + "}";
     }
 
 }

@@ -23,12 +23,13 @@
         </div>
         <div class="form-group">
             <label for="name">Phonenumber</label>
-            <input type="text" class="form-control" id="telephoneNumber" required
-                [(ngModel)]="accountDto.telephoneNumber" name="telephoneNumber">
+            <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="accountDto.phoneNumber"
+                name="phoneNumber">
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </div>
+
 
 <div [hidden]="!submitted">
     <h4>You submitted successfully!</h4>

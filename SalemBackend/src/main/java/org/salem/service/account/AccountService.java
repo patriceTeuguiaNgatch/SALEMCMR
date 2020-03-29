@@ -52,7 +52,7 @@ public class AccountService {
 
         final Account account = this.accountFactory.create(accountRequestDto.getFirstName(),
                 accountRequestDto.getLastName(), accountRequestDto.getPassword(), accountRequestDto.getEmail(),
-                accountRequestDto.getTelephoneNumber(), accountRequestDto.getRole());
+                accountRequestDto.getPhoneNumber(), accountRequestDto.getRole());
         final Account accountSave = accountRepository.save(account);
 
         return accountSave.getAccountId();
@@ -60,7 +60,7 @@ public class AccountService {
 
     public AccountDto findAccountById(final String accountId) throws Exception {
 
-        LOGGER.info("Find account by   Id : " + accountId + " : " + LOGGER.getName());
+        LOGGER.info("Find account by Id : " + accountId + " : " + LOGGER.getName());
 
         Long accountIdLong = this.convertStringToLong(accountId);
 
@@ -87,7 +87,7 @@ public class AccountService {
         account.setLastName(accountRequestDto.getLastName());
         account.setPassword(accountRequestDto.getPassword());
         account.setEmail(accountRequestDto.getPassword());
-        account.setTelephoneNumber(accountRequestDto.getTelephoneNumber());
+        account.setPhoneNumber(accountRequestDto.getPhoneNumber());
         final Account accountUpdate = accountRepository.save(account);
         final AccountDto accountDtoUpdate = accountAssembler.create(accountUpdate);
 
