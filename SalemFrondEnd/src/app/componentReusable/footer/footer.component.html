@@ -1,29 +1,36 @@
-<footer class="footer tile is-parent notification has-background-info">
+<footer class="footer tile is-parent notification has-background-grey-lighter">
     <div class="tile is-child ">
         <div class="has-text-centered">
             <p class="has-text-weight-bold"> {{title}} </p>
-            <p class=""><i class="icon fas fa-map-marked-alt fa-lg"></i> {{adresse}}</p>
+            <p class=""><i class="icon fas fa-map-marked-alt fa-lg has-text-success"></i> {{adresse}}</p>
             <p class=""><i class="icon fas fa-phone-square fa-lg"></i> {{phoneNumber}}</p>
         </div>
     </div>
     <div class=" tile is-child">
         <div class="has-text-centered">
             <p class="has-text-centered"><i class="icon fa-lg"></i>{{null}}</p>
-            <a class="has-text-centered" href={{email}}><i class="icon fas far fa-envelope fa-lg"></i> {{email}}</a>
+            <a class="has-text-centered" href={{email}}><i class="icon fas far fa-envelope fa-lg has-text-info"></i>
+                {{email}}</a>
         </div>
 
     </div>
     <div class="tile is-child">
         <p><a class="has-text-centered  has-text-weight-bold" href="/contact">Suivez nous !</a></p>
         <div class="column has-text-centered">
-            <a class="icon" href="#"><i class="fab fa-facebook fa-lg"></i></a>
-            <a class="icon" href="#"><i class="fab fa-twitter-square fa-lg"></i></a>
-            <a class="icon" href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+            <a class="icon" href="#"><i class="fab fa-facebook fa-lg has-text-link"></i></a>
+            <a class="icon" href="#"><i class="fab fa-twitter-square fa-lg has-text-info"></i></a>
+            <a class="icon" href="#"><i class="fab fa-linkedin fa-lg has-text-info"></i></a>
             <a class="icon" href="#"><i class="fab fa-instagram fa-lg"></i></a>
         </div>
     </div>
 </footer>
 
+<div class="tile is-child  has-text-centered help">
+    <p> © Tous droits reservés {{title}} | <a routerLink="politiqueConfidentialite" routerLinkActive="active"> Politique
+            de
+            confidentialité </a> |
+        <a routerLink="modaliteUtilisation" routerLinkActive="active"> Modalités d'utilisation</a></p>
+</div>
 <div class="tile is-child  has-text-centered">
-    <p> © Tous droits reservés Salem | Politique de confidentialité </p>
+    <p> </p>
 </div>

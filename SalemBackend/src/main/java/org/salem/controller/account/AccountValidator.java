@@ -7,5 +7,4 @@ public class AccountValidator {
 
     public AccountValidator() {
     }
-
 }

@@ -23,15 +23,14 @@ public class AccountService {
     private final AccountAssembler accountAssembler;
     @Autowired
     private final AccountRepository accountRepository;
-    @Autowired
-    private final RolesRepository rolesRepository;
+    // @Autowired
+    // private final RolesRepository rolesRepository;
 
     public AccountService(final AccountFactory accountFactory, final AccountAssembler accountAssembler,
-            final AccountRepository accountRepository, final RolesRepository rolesRepository) {
+            final AccountRepository accountRepository) {
         this.accountFactory = accountFactory;
         this.accountAssembler = accountAssembler;
         this.accountRepository = accountRepository;
-        this.rolesRepository = rolesRepository;
     }
 
     private static final Logger LOGGER = Logger.getLogger(AccountService.class.getName());

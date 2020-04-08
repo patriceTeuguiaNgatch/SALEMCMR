@@ -17,6 +17,8 @@ import { DonMaterielComponent } from './don-materiel/don-materiel.component';
 import { DonFinancierComponent } from './don-financier/don-financier.component';
 import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
+import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
+import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { ContactComponent } from './contact/contact.component';
     DonFinancierComponent,
     RemerciementComponent,
     ContactComponent,
+    ModalitesUtilisationComponent,
+    PolitiqueConfidentialiteComponent,
   ],
   imports: [
     BrowserModule,

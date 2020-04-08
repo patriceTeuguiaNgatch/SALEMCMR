@@ -9,6 +9,8 @@ import { DonMaterielComponent } from './don-materiel/don-materiel.component';
 import { DonFinancierComponent } from './don-financier/don-financier.component';
 import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
+import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
+import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { title: 'home page' } },
   { path: 'remerciement', component: RemerciementComponent, data: { title: 'remerciement' } },
   { path: 'contact', component: ContactComponent, data: { title: 'contact' } },
+  { path: 'modaliteUtilisation', component: ModalitesUtilisationComponent, data: { title: 'modalités utilisation' } },
+  { path: 'politiqueConfidentialite', component: PolitiqueConfidentialiteComponent, data: { title: 'Politique confidentialité' } },
 
   { path: '**', component: NoPageFoundComponent, data: { title: 'no page found' } },
 
