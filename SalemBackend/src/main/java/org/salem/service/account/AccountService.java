@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import org.salem.controller.account.dto.AccountRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
-import org.salem.domain.account.RolesRepository;
 import org.salem.service.assemler.AccountAssembler;
 import org.salem.service.dto.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;

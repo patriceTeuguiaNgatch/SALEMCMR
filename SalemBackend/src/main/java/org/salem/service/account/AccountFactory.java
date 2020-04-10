@@ -22,8 +22,8 @@ public class AccountFactory {
 
     }
 
-    public Account create(String firstName, String lastName, String password, String email, String telephoneNumber,
-            String role) throws InvalidAccountTypeException {
+    public Account create(final String firstName, final String lastName, final String password, final String email,
+            final String telephoneNumber, final String role) throws InvalidAccountTypeException {
         final Set<Role> setRoles = new HashSet<>();
         if (role.equals(eRoleSubscriber.toString())) {
             setRoles.add(roleVolunteer);
@@ -33,7 +33,7 @@ public class AccountFactory {
             setRoles.add(roleModerator);
             return new Account(firstName, lastName, password, email, telephoneNumber, setRoles);
         } else if (role.equals(eRoleAdmistrator.toString())) {
-            Role roleAdmistrator = new Role(eRoleAdmistrator);
+            final Role roleAdmistrator = new Role(eRoleAdmistrator);
             setRoles.add(roleVolunteer);
             setRoles.add(roleModerator);
             setRoles.add(roleAdmistrator);

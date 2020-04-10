@@ -7,8 +7,8 @@
         <!-- <a class="navbar-item" href="#"><img class="" src="{{imageMenu}}" alt="Logo SALEM" width="112" height="30"></a> -->
 
         <a class="navbar-item icon" href="#"><i class="fas fa-hand-holding-heart fas fa-3x has-text-primary"></i></a>
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-            data-target="navbarBasicExample">
+        <a (click)="toggleNavbar()" role="button" #navBurger class="navbar-burger burger" aria-label="menu"
+            aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -16,7 +16,7 @@
         <p class="has-text-centered"><i class="icon fa-lg"></i>{{null}}</p>
     </div>
 
-    <div id="navbarBasicExample " class="navbar-menu">
+    <div id="navbarBasicExample " class="navbar-menu" #navMenu>
         <div class="navbar-start">
             <a class="navbar-item" routerLink="" routerLinkActive="active"> {{acceuil}} </a>
             <a class="navbar-item" routerLink="don" routerLinkActive="active"> <strong>{{donner}}</strong></a>
