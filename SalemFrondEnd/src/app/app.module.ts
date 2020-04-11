@@ -19,6 +19,8 @@ import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
 import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
 import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
+import { MissionComponent } from './mission/mission.component';
+import { EquipeComponent } from './equipe/equipe.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/p
     ContactComponent,
     ModalitesUtilisationComponent,
     PolitiqueConfidentialiteComponent,
+    MissionComponent,
+    EquipeComponent,
   ],
   imports: [
     BrowserModule,

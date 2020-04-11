@@ -11,7 +11,8 @@ import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
 import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
 import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
-
+import { MissionComponent } from './mission/mission.component';
+import { EquipeComponent } from './equipe/equipe.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent, data: { title: 'contact' } },
   { path: 'modaliteUtilisation', component: ModalitesUtilisationComponent, data: { title: 'modalités utilisation' } },
   { path: 'politiqueConfidentialite', component: PolitiqueConfidentialiteComponent, data: { title: 'Politique confidentialité' } },
+  { path: 'mission', component: MissionComponent, data: { title: 'mission' } },
+  { path: 'equipe', component: EquipeComponent, data: { title: 'equipe' } },
 
   { path: '**', component: NoPageFoundComponent, data: { title: 'no page found' } },
 
