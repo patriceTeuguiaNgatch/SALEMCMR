@@ -20,12 +20,19 @@
             <div class="tile is-parent">
                 <article class="tile is-child">
                     <p class="subtitle"><strong class="has-text-info">AMOUR - JUSTICE - PARTAGE</strong> </p>
+
                     <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/640x480.png">
+                        <img src={{listPicture[currentPositionPicture]}} alt="Image d'acceuil">
+
+                        <span class="icon is-pulled-right has-text-primary" (click)="onClickRight()"><i
+                                class="fas fa-chevron-circle-right fa-lg "></i></span>
+                        <span class="icon is-pulled-left has-text-primary" (click)="onClickLeft()"><i
+                                class="fas fa-chevron-circle-left fa-lg"></i></span>
                     </figure>
                     <p>
-                        ###### texte pour decire l'image ####
+                        ####{{listTextPicture[currentPositionPicture]}}####
                     </p>
+
                 </article>
             </div>
         </div>

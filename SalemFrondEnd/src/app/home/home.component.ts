@@ -7,28 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  listImage = ["/assets/image/image0.png", "/assets/image/image1.png", "/assets/image/image2.png", "/assets/image/image3.png", "/assets/image/image4.png", "/assets/image/image5.png", "/assets/image/image6.png"]
-  currentPositionImage = 0;
+  listPicture = ["/assets/image/image0.png", "/assets/image/image1.png", "/assets/image/image2.png", "/assets/image/image3.png", "/assets/image/image4.png", "/assets/image/image5.png", "/assets/image/image6.png"]
+  listTextPicture = ["/assets/image/image0. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng", "/assets/image/image1. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image2. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image3. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image4 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image5 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image6. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypngpng"]
+
+  currentPositionPicture = 0;
 
   constructor() { }
 
   ngOnInit(): void {
   }
   onClickRight() {
-    let value = this.currentPositionImage + 1;
-    if (value < this.listImage.length) {
-      this.currentPositionImage = value;
+    let value = this.currentPositionPicture + 1;
+    if (value < this.listPicture.length) {
+      this.currentPositionPicture = value;
     } else {
-      this.currentPositionImage = 0;
+      this.currentPositionPicture = 0;
     }
   }
 
   onClickLeft() {
-    let value = this.currentPositionImage - 1;
+    let value = this.currentPositionPicture - 1;
     if (value > 0) {
-      this.currentPositionImage = value;
+      this.currentPositionPicture = value;
     } else {
-      this.currentPositionImage = this.listImage.length - 1;
+      this.currentPositionPicture = this.listPicture.length - 1;
     }
   }
 }
