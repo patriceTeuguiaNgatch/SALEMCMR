@@ -22,8 +22,6 @@ public class AccountService {
     private final AccountAssembler accountAssembler;
     @Autowired
     private final AccountRepository accountRepository;
-    // @Autowired
-    // private final RolesRepository rolesRepository;
 
     public AccountService(final AccountFactory accountFactory, final AccountAssembler accountAssembler,
             final AccountRepository accountRepository) {
@@ -60,7 +58,7 @@ public class AccountService {
 
         LOGGER.info("Find account by Id : " + accountId + " : " + LOGGER.getName());
 
-        Long accountIdLong = this.convertStringToLong(accountId);
+        final Long accountIdLong = this.convertStringToLong(accountId);
 
         final Account account = accountRepository.findById(accountIdLong)
 
@@ -76,7 +74,7 @@ public class AccountService {
         LOGGER.info("Update account by Id : " + accountId + " and name : " + accountRequestDto.getFirstName() + " : "
                 + LOGGER.getName());
 
-        Long accountIdLong = this.convertStringToLong(accountId);
+        final Long accountIdLong = this.convertStringToLong(accountId);
 
         final Account account = accountRepository.findById(accountIdLong)
 
@@ -84,7 +82,7 @@ public class AccountService {
         account.setFirstName(accountRequestDto.getFirstName());
         account.setLastName(accountRequestDto.getLastName());
         account.setPassword(accountRequestDto.getPassword());
-        account.setEmail(accountRequestDto.getPassword());
+        account.setEmail(accountRequestDto.getEmail());
         account.setPhoneNumber(accountRequestDto.getPhoneNumber());
         final Account accountUpdate = accountRepository.save(account);
         final AccountDto accountDtoUpdate = accountAssembler.create(accountUpdate);
@@ -96,7 +94,7 @@ public class AccountService {
 
         LOGGER.info("Delete account by Id : " + accountId + " " + LOGGER.getName());
 
-        Long accountIdLong = this.convertStringToLong(accountId);
+        final Long accountIdLong = this.convertStringToLong(accountId);
 
         final Account account = accountRepository.findById(accountIdLong)
                 .orElseThrow(() -> new Exception("Account not found for this id : " + accountId));

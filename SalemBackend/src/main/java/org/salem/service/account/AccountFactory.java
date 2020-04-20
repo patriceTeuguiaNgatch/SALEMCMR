@@ -11,20 +11,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AccountFactory {
-    private final ERole eRoleSubscriber = ERole.ROLE_SUBSCRIBER;
-    private final ERole eRoleModerator = ERole.ROLE_MODERATOR;
-    private final ERole eRoleAdmistrator = ERole.ROLE_ADMINISTRATOR;
-
-    private final Role roleVolunteer = new Role(eRoleSubscriber);
-    private final Role roleModerator = new Role(eRoleModerator);
+    private ERole eRoleSubscriber = ERole.ROLE_SUBSCRIBER;
+    private ERole eRoleModerator = ERole.ROLE_MODERATOR;
+    private ERole eRoleAdmistrator = ERole.ROLE_ADMINISTRATOR;
 
     public AccountFactory() {
 
     }
 
-    public Account create(final String firstName, final String lastName, final String password, final String email,
-            final String telephoneNumber, final String role) throws InvalidAccountTypeException {
-        final Set<Role> setRoles = new HashSet<>();
+    public Account create(String firstName, String lastName, String password, String email, String telephoneNumber,
+            String role) throws InvalidAccountTypeException {
+        Role roleVolunteer = new Role(eRoleSubscriber);
+        Role roleModerator = new Role(eRoleModerator);
+        Set<Role> setRoles = new HashSet<>();
         if (role.equals(eRoleSubscriber.toString())) {
             setRoles.add(roleVolunteer);
             return new Account(firstName, lastName, password, email, telephoneNumber, setRoles);
@@ -33,7 +32,7 @@ public class AccountFactory {
             setRoles.add(roleModerator);
             return new Account(firstName, lastName, password, email, telephoneNumber, setRoles);
         } else if (role.equals(eRoleAdmistrator.toString())) {
-            final Role roleAdmistrator = new Role(eRoleAdmistrator);
+            Role roleAdmistrator = new Role(eRoleAdmistrator);
             setRoles.add(roleVolunteer);
             setRoles.add(roleModerator);
             setRoles.add(roleAdmistrator);

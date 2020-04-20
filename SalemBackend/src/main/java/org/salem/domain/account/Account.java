@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,7 +24,7 @@ public class Account implements Serializable {
 
     @Id
     @Column(name = "accountId")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
 
     @Column(name = "firstName", nullable = false)
@@ -41,7 +42,7 @@ public class Account implements Serializable {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_Id", referencedColumnName = "accountId"), inverseJoinColumns = @JoinColumn(name = "role_Id", referencedColumnName = "roleId"))
     private Set<Role> roles = new HashSet<>();
 

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -23,14 +23,14 @@ public class Role implements Serializable {
 
     @Id
     @Column(name = "roleId")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "eRole")
     private ERole eRole;
 
-    @ManyToMany(mappedBy = "roles", cascade = { CascadeType.MERGE })
+    @ManyToMany(mappedBy = "roles")
     private Set<Account> accounts = new HashSet<>();
 
     public Role() {
