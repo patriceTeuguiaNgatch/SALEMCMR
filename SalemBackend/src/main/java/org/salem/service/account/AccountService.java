@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 import org.salem.controller.account.dto.AccountRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
+import org.salem.domain.exception.InvalidAccountTypeException;
+import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.assemler.AccountAssembler;
 import org.salem.service.dto.AccountDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,7 @@ public class AccountService {
         return accountListDtos;
     }
 
-    public Long createAccount(final AccountRequestDto accountRequestDto) throws Exception {
+    public Long createAccount(final AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 
@@ -54,31 +56,27 @@ public class AccountService {
         return accountSave.getAccountId();
     }
 
-    public AccountDto findAccountById(final String accountId) throws Exception {
+    public AccountDto findAccountById(final Long accountId) throws ResourceNotFoundException {
 
         LOGGER.info("Find account by Id : " + accountId + " : " + LOGGER.getName());
 
-        final Long accountIdLong = this.convertStringToLong(accountId);
+        final Account account = accountRepository.findById(accountId)
 
-        final Account account = accountRepository.findById(accountIdLong)
-
-                .orElseThrow(() -> new Exception("Account not found for this id : " + accountId));
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found for this id : " + accountId));
         final AccountDto accountDto = accountAssembler.create(account);
 
         return accountDto;
     }
 
-    public AccountDto updateAccount(final String accountId, final AccountRequestDto accountRequestDto)
-            throws Exception {
+    public AccountDto updateAccount(final Long accountId, final AccountRequestDto accountRequestDto)
+            throws ResourceNotFoundException {
 
         LOGGER.info("Update account by Id : " + accountId + " and name : " + accountRequestDto.getFirstName() + " : "
                 + LOGGER.getName());
 
-        final Long accountIdLong = this.convertStringToLong(accountId);
+        final Account account = accountRepository.findById(accountId)
 
-        final Account account = accountRepository.findById(accountIdLong)
-
-                .orElseThrow(() -> new Exception("Account not found for this id : " + accountId));
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found for this id : " + accountId));
         account.setFirstName(accountRequestDto.getFirstName());
         account.setLastName(accountRequestDto.getLastName());
         account.setPassword(accountRequestDto.getPassword());
@@ -90,14 +88,12 @@ public class AccountService {
         return accountDtoUpdate;
     }
 
-    public Map<String, Boolean> deleteAccount(final String accountId) throws Exception {
+    public Map<String, Boolean> deleteAccount(final Long accountId) throws ResourceNotFoundException {
 
         LOGGER.info("Delete account by Id : " + accountId + " " + LOGGER.getName());
 
-        final Long accountIdLong = this.convertStringToLong(accountId);
-
-        final Account account = accountRepository.findById(accountIdLong)
-                .orElseThrow(() -> new Exception("Account not found for this id : " + accountId));
+        final Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found for this id : " + accountId));
 
         accountRepository.delete(account);
         final Map<String, Boolean> response = new HashMap<>();
@@ -106,7 +102,4 @@ public class AccountService {
         return response;
     }
 
-    private Long convertStringToLong(final String chaine) throws Exception {
-        return Long.parseLong(chaine);
-    }
 }

@@ -1,12 +1,36 @@
 package org.salem.controller.account.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.salem.controller.exception.RolePreference;
+
 public class AccountRequestDto {
 
+    @NotNull(message = "Email is required")
+    @Size(min = 2, max = 30)
+    @Email
     private String email;
+
+    @NotNull(message = "Password is required")
+    @Size(min = 6, max = 30)
     private String password;
+
+    @NotNull(message = "First name is required")
+    @Size(min = 2, max = 30)
     private String firstName;
+
+    @NotNull(message = "Last name is required")
+    @Size(min = 2, max = 30)
     private String lastName;
+
+    @NotNull(message = "Phone number is required")
+    @Size(min = 2, max = 20)
     private String phoneNumber;
+
+    @NotNull(message = "Role is required")
+    @RolePreference
     private String role;
 
     public AccountRequestDto() {
@@ -68,36 +92,6 @@ public class AccountRequestDto {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public AccountRequestDto email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public AccountRequestDto password(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public AccountRequestDto firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public AccountRequestDto lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public AccountRequestDto telephoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-        return this;
-    }
-
-    public AccountRequestDto role(String role) {
-        this.role = role;
-        return this;
     }
 
     @Override
