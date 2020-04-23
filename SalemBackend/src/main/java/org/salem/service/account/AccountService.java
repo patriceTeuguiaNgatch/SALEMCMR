@@ -1,8 +1,6 @@
 package org.salem.service.account;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import org.salem.controller.account.dto.AccountRequestDto;
@@ -44,7 +42,7 @@ public class AccountService {
         return accountListDtos;
     }
 
-    public Long createAccount(final AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
+    public AccountDto createAccount(final AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 
@@ -52,8 +50,9 @@ public class AccountService {
                 accountRequestDto.getLastName(), accountRequestDto.getPassword(), accountRequestDto.getEmail(),
                 accountRequestDto.getPhoneNumber(), accountRequestDto.getRole());
         final Account accountSave = accountRepository.save(account);
+        AccountDto accountDto = accountAssembler.create(accountSave);
 
-        return accountSave.getAccountId();
+        return accountDto;
     }
 
     public AccountDto findAccountById(final Long accountId) throws ResourceNotFoundException {
@@ -88,7 +87,7 @@ public class AccountService {
         return accountDtoUpdate;
     }
 
-    public Map<String, Boolean> deleteAccount(final Long accountId) throws ResourceNotFoundException {
+    public AccountDto deleteAccount(final Long accountId) throws ResourceNotFoundException {
 
         LOGGER.info("Delete account by Id : " + accountId + " " + LOGGER.getName());
 
@@ -96,10 +95,9 @@ public class AccountService {
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found for this id : " + accountId));
 
         accountRepository.delete(account);
-        final Map<String, Boolean> response = new HashMap<>();
-        response.put("delete", Boolean.TRUE);
+        final AccountDto accountDtoDelete = accountAssembler.create(account);
 
-        return response;
+        return accountDtoDelete;
     }
 
 }

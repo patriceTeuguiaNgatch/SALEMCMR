@@ -1,0 +1,5 @@
+div.hero.is-vertical{
+    background-image: url("/assets/image/pictureCreateAccount.png");
+    background-size: cover;
+    background-position: left left;
+}

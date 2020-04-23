@@ -10,7 +10,7 @@ import { AccountDto } from '../../dto/accountDto';
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
-  accountDtoList: Observable<AccountDto[]>
+  accountDtoList: Observable<AccountDto[]>;
 
   constructor(private accountService: AccountService, private router: Router) { }
 

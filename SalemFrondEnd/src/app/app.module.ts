@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CreateAccoutComponent } from './account/create-accout/create-accout.component';
 import { AccountListComponent } from './account/account-list/account-list.component';
 import { AccountInformationsComponent } from './account/account-informations/account-informations.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './componentReusable/footer/footer.component';
 import { HeaderComponent } from './componentReusable/header/header.component';
@@ -21,6 +21,9 @@ import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites
 import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
 import { MissionComponent } from './mission/mission.component';
 import { EquipeComponent } from './equipe/equipe.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ErrorIntercept } from './account/errorIntercept';
 
 
 @NgModule({
@@ -42,6 +45,8 @@ import { EquipeComponent } from './equipe/equipe.component';
     PolitiqueConfidentialiteComponent,
     MissionComponent,
     EquipeComponent,
+    CreateAccountComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +55,13 @@ import { EquipeComponent } from './equipe/equipe.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorIntercept,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

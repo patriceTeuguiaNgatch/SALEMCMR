@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
+import org.salem.controller.account.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
@@ -31,8 +32,9 @@ public class AccountAdviceController {
 
         methodArgumentNotValidException.getBindingResult().getFieldErrors().forEach(
                 error -> errorDetails.add(new ErrorDetail(new Date(), error.getField(), (error.getDefaultMessage()))));
+        ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetails);
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -45,8 +47,9 @@ public class AccountAdviceController {
             errorDetails.add(new ErrorDetail(new Date(), constraintViolation.getMessage(),
                     (constraintViolation.getPropertyPath()).toString()));
         });
+        ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetails);
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @ExceptionHandler(NumberFormatException.class)
@@ -58,8 +61,9 @@ public class AccountAdviceController {
         List<ErrorDetail> errorDetails = new ArrayList<>();
         errorDetails
                 .add(new ErrorDetail(new Date(), numberFormatException.getMessage(), request.getDescription(false)));
+        ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetails);
 
-        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -69,7 +73,9 @@ public class AccountAdviceController {
             WebRequest request) {
         ErrorDetail errorDetail = new ErrorDetail(new Date(), resourceNotFoundException.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.NOT_FOUND.toString(), null, errorDetail);
+
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @ExceptionHandler(InvalidAccountTypeException.class)
@@ -79,7 +85,9 @@ public class AccountAdviceController {
             WebRequest request) {
         ErrorDetail errorDetail = new ErrorDetail(new Date(), invalidAccountTypeException.getMessage(),
                 request.getDescription(false));
-        return new ResponseEntity<>(errorDetail, HttpStatus.BAD_REQUEST);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetail);
+
+        return ResponseEntity.accepted().body(responseDto);
     }
 
 }

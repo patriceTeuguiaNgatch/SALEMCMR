@@ -146,14 +146,14 @@ export class DonMaterielComponent implements OnInit {
       this.accountDto.password = "password";
       this.accountDto.email = this.form.value.email;
       this.accountDto.phoneNumber = this.form.value.firstName;
-      this.accountDto.donList[0] = this.donMateriel;
+      // this.accountDto.donList[0] = this.donMateriel;
 
-      console.log(this.accountDto.donList);
+      // console.log(this.accountDto.donList);
 
       this.accountService.createAccount(this.accountDto)
         .subscribe(data => console.log(data),
           error => console.log(error));
-      this.accountDto = new AccountDto();
+      // this.accountDto = new AccountDto();
 
       this.router.navigate(['remerciement']);
     }

@@ -9,24 +9,23 @@ import org.salem.controller.exception.RolePreference;
 public class AccountRequestDto {
 
     @NotNull(message = "Email is required")
-    @Size(min = 2, max = 30)
+    @Size(max = 30)
     @Email
     private String email;
 
     @NotNull(message = "Password is required")
-    @Size(min = 6, max = 30)
+    @Size(min = 6, max = 20)
     private String password;
 
     @NotNull(message = "First name is required")
-    @Size(min = 2, max = 30)
+    @Size(min = 1, max = 30)
     private String firstName;
 
     @NotNull(message = "Last name is required")
-    @Size(min = 2, max = 30)
+    @Size(min = 1, max = 30)
     private String lastName;
 
-    @NotNull(message = "Phone number is required")
-    @Size(min = 2, max = 20)
+    @Size(max = 15)
     private String phoneNumber;
 
     @NotNull(message = "Role is required")
@@ -92,13 +91,6 @@ public class AccountRequestDto {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "{" + " email='" + getEmail() + "'" + ", password='" + getPassword() + "'" + ", firstName='"
-                + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", phoneNumber='" + getPhoneNumber()
-                + "'" + ", role='" + getRole() + "'" + "}";
     }
 
 }

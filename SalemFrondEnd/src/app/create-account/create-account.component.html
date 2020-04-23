@@ -1,0 +1,124 @@
+<div class="tile hero is-ancestor container is-fullhd  is-vertical">
+
+    <div class="tile is-parent">
+
+        <!-- <div class="tile is-child">
+            <article class="">
+                <figure class="image ">
+                    <img src={{pictureCreateAccount}}>
+                </figure>
+            </article>
+        </div> -->
+        <div class="tile is-12 is-child box">
+
+            <div class="tile is-parent">
+                <div class="tile is-child">
+
+                    <div class="tile is-child">
+                        <p class="content"> <strong>CREE VOTRE COMPTE</strong> </p>
+                    </div>
+
+                    <form [formGroup]="form">
+
+                        <div class="field">
+                            <p class="has-text-left help"> <strong class="has-text-danger">*</strong> Champ obligatoire
+                            </p>
+                            <progress class="progress is-info is-small" value="100" max="100"></progress>
+                        </div>
+
+                        <div class="field form-group">
+                            <label class="label has-text-left" for="firstName"><strong
+                                    class="has-text-danger">*</strong>
+                                Nom</label>
+                            <div class="control">
+                                <input formControlName="firstName" class="input form-control" type="text" id="firstName"
+                                    placeholder={{inputFirstName}}>
+                            </div>
+                            <div *ngIf="validation.firstName.touched && validation.firstName.invalid"
+                                class="help is-danger">
+                                <div *ngIf="validation.firstName.errors.required">Le nom est requis</div>
+                            </div>
+                        </div>
+                        <div class="field form-group">
+                            <label class="label has-text-left" for="firstName"> <strong
+                                    class="has-text-danger">*</strong>
+                                Prenom</label>
+                            <div class="control">
+                                <input formControlName="lastName" class="input form-control" type="text" id="lastName"
+                                    placeholder={{inputLastName}}>
+                            </div>
+                            <div *ngIf="validation.lastName.touched && validation.lastName.invalid"
+                                class="help is-danger">
+                                <div *ngIf="validation.lastName.errors.required">Le prenom est requis</div>
+                            </div>
+                        </div>
+                        <div class="field form-group">
+                            <label class="label has-text-left" for="firstName"> <strong
+                                    class="has-text-danger">*</strong>
+                                Mot de passe</label>
+                            <div class="control has-icons-left">
+                                <input formControlName="password" type="password" class="input form-control"
+                                    id="password" placeholder={{inputPassword}}>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                            <div *ngIf="validation.password.touched && validation.password.invalid"
+                                class="help is-danger">
+                                <div *ngIf="validation.password.errors.required">Le mot de passe est requis</div>
+                                <div *ngIf="validation.password.errors.minlength">Le mot de passe doit avoir plus de
+                                    {{minimunLenghtPassword}}
+                                    charactères</div>
+                            </div>
+                        </div>
+
+                        <div class="field form-group">
+                            <label class="label has-text-left" type="email" for="email"> <strong
+                                    class="has-text-danger">*</strong>
+                                Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input formControlName="email" id="email" class="input form-control" type="text"
+                                    placeholder={{inputEmail}}>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                            <div *ngIf="validation.email.touched && validation.email.invalid" class="help is-danger">
+                                <p *ngIf="validation.email.errors.required">{{emailIsrequired}}</p>
+                                <p *ngIf="validation.email.errors.email">{{thisEmailIsInvalid}}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+                            <label class="label has-text-left">Téléphone</label>
+                            <div class="control">
+                                <input formControlName="phoneNumber" id="phoneNumber" class="form-control" class="input"
+                                    type="text">
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-info" type="submit" (click)="submit()"
+                                    [disabled]="!form.valid">Soumettre</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="hasError" class="tile is-parent">
+        <div class="tile is-child">
+            <article class="message is-danger is-small">
+                <div class="message-body">
+                    {{errorMessage}}
+                </div>
+            </article>
+        </div>
+    </div>
+</div>

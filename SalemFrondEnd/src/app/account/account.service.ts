@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, } from 'rxjs';
+import { ResponseAccountDto } from '../dto/ResponseAccountDto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +23,12 @@ export class AccountService {
     });
   }
 
-  updateAccount(id: string, value: any): Observable<Object> {
+  updateAccount(id: string, value: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
-  createAccount(accountDto: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/subscriber/create`, accountDto);
+
+  createAccount(accountDto: Object): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/subscriber/create`, accountDto);
   }
 
   findAccountById(id: string): Observable<any> {

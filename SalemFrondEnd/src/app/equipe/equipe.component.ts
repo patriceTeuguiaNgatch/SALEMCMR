@@ -57,7 +57,7 @@ export class EquipeComponent implements OnInit {
     "Wake Island", "Wallis - et - Futuna", "Yémen", "Zambie", "Zimbabwe",
   ]
 
-  accountDto: AccountDto = new AccountDto();
+  accountDto: AccountDto;// = new AccountDto();
 
   constructor(private router: Router) { }
 

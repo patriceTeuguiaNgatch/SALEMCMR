@@ -15,6 +15,7 @@ export class MissionComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   goToDon() {
     this.router.navigate(['don'])
   }

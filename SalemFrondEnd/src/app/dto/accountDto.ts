@@ -1,12 +1,11 @@
 import { DonDto } from './donDto';
 
-export class AccountDto {
+export interface AccountDto {
     accountId: string;
     firstName: string;
     lastName: string;
     password: string;
     email: string;
     phoneNumber: string;
-    role: string = "subscriber";
-    donList: any = [];
+    role: string;
 }

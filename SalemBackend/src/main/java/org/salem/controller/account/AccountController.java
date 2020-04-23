@@ -1,14 +1,14 @@
 package org.salem.controller.account;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.salem.controller.account.dto.AccountRequestDto;
+import org.salem.controller.account.dto.ResponseDto;
+import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.account.AccountService;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,69 +45,72 @@ public class AccountController {
     @PostMapping(path = "/subscriber/create", produces = "application/json", consumes = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> createAccountSubscriber(@RequestBody final @Valid AccountRequestDto accountRequestDto)
-            throws InvalidAccountTypeException {
+    public ResponseEntity<ResponseDto> createAccountSubscriber(
+            @RequestBody final @Valid AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 
-        final Long accountId = accountService.createAccount(accountRequestDto);
+        final AccountDto accountDto = accountService.createAccount(accountRequestDto);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), accountDto, new ErrorDetail());
 
-        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{accountId}")
-                .buildAndExpand(accountId).toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @GetMapping(path = "/collection", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<AccountDto>> findAllAccount() {
+    public ResponseEntity<ResponseDto> findAllAccount() {
 
         LOGGER.info("Find all accounts: " + LOGGER.getName());
 
         final List<AccountDto> accountDtos = accountService.findAll();
+        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDtos, new ErrorDetail());
 
-        return ResponseEntity.accepted().body(accountDtos);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @Valid
-    public ResponseEntity<AccountDto> findAccountById(@PathVariable(value = "id") @Positive final Long accountId)
+    public ResponseEntity<ResponseDto> findAccountById(@PathVariable(value = "id") @Positive final Long accountId)
             throws ResourceNotFoundException {
 
         LOGGER.info("Find the account : " + accountId + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.findAccountById(accountId);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
-        return ResponseEntity.accepted().body(accountDto);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @PutMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @Valid
-    public ResponseEntity<AccountDto> updateAccount(@PathVariable(value = "id") @Positive final Long accountId,
+    public ResponseEntity<ResponseDto> updateAccount(@PathVariable(value = "id") @Positive final Long accountId,
             @RequestBody final @Valid AccountRequestDto accountRequestDto) throws ResourceNotFoundException {
 
         LOGGER.info("Update the account : " + accountId + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.updateAccount(accountId, accountRequestDto);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
-        return ResponseEntity.accepted().body(accountDto);
+        return ResponseEntity.accepted().body(responseDto);
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") @Positive final Long accountId)
+    public ResponseEntity<ResponseDto> deleteAccount(@PathVariable(value = "id") @Positive final Long accountId)
             throws ResourceNotFoundException {
 
         LOGGER.info("Delete the account : " + accountId + " : " + LOGGER.getName());
 
-        final Map<String, Boolean> response = accountService.deleteAccount(accountId);
+        final AccountDto accountDto = accountService.deleteAccount(accountId);
+        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
-        return response;
+        return ResponseEntity.accepted().body(responseDto);
     }
 
 }

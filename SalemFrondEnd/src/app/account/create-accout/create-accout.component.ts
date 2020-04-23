@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CreateAccoutComponent implements OnInit {
 
-  accountDto: AccountDto = new AccountDto()
+  // accountDto: AccountDto = new AccountDto()
   submitted = false;
 
   constructor(private accountService: AccountService, private router: Router) { }
@@ -21,14 +21,14 @@ export class CreateAccoutComponent implements OnInit {
 
   newAccount() {
     this.submitted = false;
-    this.accountDto = new AccountDto();
+    // this.accountDto = new AccountDto();
   }
 
   save() {
-    this.accountService.createAccount(this.accountDto)
-      .subscribe(data => console.log(data),
-        error => console.log(error));
-    this.accountDto = new AccountDto();
+    // this.accountService.createAccount(this.accountDto)
+    //   .subscribe(data => console.log(data),
+    //     error => console.log(error));
+    // this.accountDto = new AccountDto();
     this.gotoSigIn();
   }
 

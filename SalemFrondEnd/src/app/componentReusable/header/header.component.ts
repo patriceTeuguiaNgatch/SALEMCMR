@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,6 @@ export class HeaderComponent implements OnInit {
   mission = 'Mission';
   contact = 'Contact';
   don = 'Faire un don';
-  imageMenu = '/assets/image/image1.png';
   signIn = 'Se connecter';
   registration = "S'inscrire";
   information = 'Information'
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('navBurger') navBurger: ElementRef;
   @ViewChild('navMenu') navMenu: ElementRef;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -36,5 +36,9 @@ export class HeaderComponent implements OnInit {
   toggleNavbar() {
     this.navBurger.nativeElement.classList.toggle('is-active');
     this.navMenu.nativeElement.classList.toggle('is-active');
+  }
+
+  createAccount() {
+    this.router.navigate(['createAccount'])
   }
 }

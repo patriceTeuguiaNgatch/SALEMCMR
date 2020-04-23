@@ -41,7 +41,7 @@
             <div class="navbar-item">
                 <div class="buttons">
                     <a *ngIf="isSignInValue" class="button is-info">{{signIn}}</a>
-                    <a *ngIf="isRegistrationValue" class="button is-info">{{registration}}</a>
+                    <a (click)="createAccount()" *ngIf="isRegistrationValue" class="button is-info">{{registration}}</a>
                     <a *ngIf="isLogOutValue" class="button is-light is-info"><strong>{{logOut}}</strong></a>
                     <p class="has-text-centered"><i class="icon fa-lg"></i>{{null}}</p>
                 </div>

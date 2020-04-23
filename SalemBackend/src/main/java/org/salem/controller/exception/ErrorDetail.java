@@ -8,6 +8,9 @@ public class ErrorDetail {
     private String message;
     private String details;
 
+    public ErrorDetail() {
+    };
+
     public ErrorDetail(Date timestamp, String message, String details) {
         super();
         this.timestamp = timestamp;

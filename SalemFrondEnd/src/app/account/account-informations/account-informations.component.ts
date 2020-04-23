@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AccountInformationsComponent implements OnInit {
 
-  accountDto: AccountDto = new AccountDto()
+  accountDto: AccountDto;
 
   constructor(private accountService: AccountService, private router: Router) { }
 
