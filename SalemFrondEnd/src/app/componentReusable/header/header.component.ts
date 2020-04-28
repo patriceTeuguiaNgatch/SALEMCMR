@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   registration = "S'inscrire";
   information = 'Information'
   logOut = 'Deconnexion';
-  null = '';
+  null = ''; ß
 
   @Input() isRegistrationValue: boolean;
   @Input() isLogOutValue: boolean;
@@ -40,5 +40,9 @@ export class HeaderComponent implements OnInit {
 
   createAccount() {
     this.router.navigate(['createAccount'])
+  }
+
+  singIn() {
+    this.router.navigate(['signIn'])
   }
 }

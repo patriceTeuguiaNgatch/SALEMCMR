@@ -1,11 +1,10 @@
-export class AccountRegistrationDto {
+export class RequestInformationDto {
 
     private firstName: string;
     private lastName: string;
-    private password: string;
     private email: string;
     private phoneNumber: string;
-    private role: string = "subscriber";
+    private comment: string;
 
     setFirstName(firstName: string) {
         this.firstName = firstName;
@@ -15,20 +14,20 @@ export class AccountRegistrationDto {
         this.lastName = lasttName;
     }
 
-    setPassword(password: string) {
-        this.password = password;
+    setPhoneNumber(phoneNumber: string) {
+        this.phoneNumber = phoneNumber;
     }
 
-    getPassword() {
-        return this.password;
-    }
 
     setEmail(email: string) {
         this.email = email;
     }
 
-    setPhoneNumber(phoneNumber: string) {
-        this.phoneNumber = phoneNumber;
+    getEmail() {
+        return this.email;
     }
 
+    setComment(comment: string) {
+        this.comment = comment;
+    }
 }

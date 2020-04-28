@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.salem.controller.account.dto.AccountRequestDto;
+import org.salem.controller.account.dto.AccountSignInDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
+import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.assemler.AccountAssembler;
@@ -22,6 +24,8 @@ public class AccountService {
     private final AccountAssembler accountAssembler;
     @Autowired
     private final AccountRepository accountRepository;
+
+    private final static String secret = "melas@2010";
 
     public AccountService(final AccountFactory accountFactory, final AccountAssembler accountAssembler,
             final AccountRepository accountRepository) {
@@ -42,15 +46,23 @@ public class AccountService {
         return accountListDtos;
     }
 
-    public AccountDto createAccount(final AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
+    public AccountDto createAccount(final AccountRequestDto accountRequestDto)
+            throws InvalidAccountTypeException, AccountAlreadyExistException {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
+
+        final String email = accountRequestDto.getEmail();
+        final Account accountFind = this.accountRepository.findByEmail(email);
+        if (accountFind != null && accountFind.hasEmail(email)) {
+            throw new AccountAlreadyExistException("Account already exist for this email : " + email);
+        }
 
         final Account account = this.accountFactory.create(accountRequestDto.getFirstName(),
                 accountRequestDto.getLastName(), accountRequestDto.getPassword(), accountRequestDto.getEmail(),
                 accountRequestDto.getPhoneNumber(), accountRequestDto.getRole());
-        final Account accountSave = accountRepository.save(account);
-        AccountDto accountDto = accountAssembler.create(accountSave);
+        account.encryptPassword(secret);
+        final Account accountSave = this.accountRepository.save(account);
+        final AccountDto accountDto = this.accountAssembler.create(accountSave);
 
         return accountDto;
     }
@@ -100,4 +112,32 @@ public class AccountService {
         return accountDtoDelete;
     }
 
+    public AccountDto findAccountByEmail(final String email) throws ResourceNotFoundException {
+
+        LOGGER.info("Find account by email : " + email + " : " + LOGGER.getName());
+
+        final Account account = accountRepository.findByEmail(email);
+        if (account == null || !account.hasEmail(email)) {
+            throw new ResourceNotFoundException("Account not found for this email : " + email);
+        }
+        final AccountDto accountDto = accountAssembler.create(account);
+
+        return accountDto;
+    }
+
+    public AccountDto singInAccount(final AccountSignInDto accountSignDto) throws ResourceNotFoundException {
+
+        final String email = accountSignDto.getEmail();
+        final String password = accountSignDto.getPassword();
+        LOGGER.info("Sign in account by email : " + email + " : " + LOGGER.getName());
+
+        final Account accountFind = accountRepository.findByEmail(email);
+        if (accountFind != null && accountFind.hasEmail(email) && accountFind.hasPassword(password, secret)) {
+            return this.accountAssembler.create(accountFind);
+
+        } else {
+            throw new ResourceNotFoundException(
+                    "Account not found for this email : " + email + " and this password : " + password);
+        }
+    }
 }

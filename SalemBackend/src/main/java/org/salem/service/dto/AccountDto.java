@@ -87,11 +87,4 @@ public class AccountDto {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "{" + " firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", password='"
-                + getPassword() + "'" + ", email='" + getEmail() + "'" + ", phoneNumber='" + getPhoneNumber() + "'"
-                + ", roles='" + getRoles() + "'" + "}";
-    }
-
 }

@@ -102,7 +102,7 @@ export class DonMaterielComponent implements OnInit {
     "Wake Island", "Wallis - et - Futuna", "Yémen", "Zambie", "Zimbabwe",
   ]
 
-  accountDto: AccountDto = new AccountDto();
+  accountDto: AccountDto;// = new AccountDto();
   donMateriel: DonDto = new DonDto();
 
   constructor(private accountService: AccountService, private router: Router) { }

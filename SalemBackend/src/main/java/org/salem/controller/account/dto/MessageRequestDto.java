@@ -1,30 +1,41 @@
 package org.salem.controller.account.dto;
 
-public class MessageDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+public class MessageRequestDto {
+
+    @NotNull(message = "First name is required")
+    @Size(min = 1, max = 30)
     private String firstName;
 
+    @NotNull(message = "Last name is required")
+    @Size(min = 1, max = 30)
     private String lastName;
 
-    private String password;
-
+    @NotNull(message = "Email is required")
+    @Size(max = 30)
+    @Email
     private String email;
 
+    @Size(max = 15)
     private String phoneNumber;
 
-    private String country;
+    @NotNull(message = "Comment is required")
+    @Size(min = 6, max = 200)
+    private String comment;
 
-    private String message;
+    public MessageRequestDto() {
 
-    public MessageDto(String firstName, String lastName, String password, String email, String phoneNumber,
-            String country, String message) {
+    }
+
+    public MessageRequestDto(String firstName, String lastName, String email, String phoneNumber, String message) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.country = country;
-        this.message = message;
+        this.comment = message;
     }
 
     public String getFirstName() {
@@ -43,14 +54,6 @@ public class MessageDto {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -67,20 +70,12 @@ public class MessageDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCountry() {
-        return this.country;
+    public String getComment() {
+        return this.comment;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
 }

@@ -36,7 +36,7 @@ public class Account implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "phoneNumber")
@@ -127,6 +127,23 @@ public class Account implements Serializable {
     public void removeRole(Role role) {
         roles.remove(role);
         role.getAccounts().remove(this);
+    }
+
+    public Boolean hasEmail(String email) {
+        return this.email.equals(email);
+    }
+
+    public boolean hasPassword(String password, String secret) {
+        String passwordDecrypt = this.decryptPassword(secret);
+        return password.equals(passwordDecrypt);
+    }
+
+    public void encryptPassword(String secret) {
+        this.password = AdvancedEncryption.encrypt(this.password, secret);
+    }
+
+    private String decryptPassword(String secret) {
+        return AdvancedEncryption.decrypt(this.password, secret);
     }
 
     @Override

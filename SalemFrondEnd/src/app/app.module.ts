@@ -24,6 +24,7 @@ import { EquipeComponent } from './equipe/equipe.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ErrorIntercept } from './account/errorIntercept';
+import { RequestInformationComponent } from './componentReusable/request-information/request-information.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ErrorIntercept } from './account/errorIntercept';
     EquipeComponent,
     CreateAccountComponent,
     SignInComponent,
+    RequestInformationComponent,
   ],
   imports: [
     BrowserModule,

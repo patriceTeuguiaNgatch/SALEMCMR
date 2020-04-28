@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  listPicture = ["/assets/image/image0.png", "/assets/image/image1.png", "/assets/image/image2.png", "/assets/image/image3.png", "/assets/image/image4.png", "/assets/image/image5.png", "/assets/image/image6.png"]
-  listTextPicture = ["/assets/image/image0. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng", "/assets/image/image1. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image2. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image3. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image4 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image5 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image6. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypngpng"]
+  listPicture = ["/assets/image/pictureLogo.png", "/assets/image/image1.png", "/assets/image/image2.png", "/assets/image/image3.png", "/assets/image/image4.png", "/assets/image/image5.png", "/assets/image/image6.png"]
+  listTextPicture = ["/assets/image/pictureLogo. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng", "/assets/image/image1. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image2. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image3. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng png", "/assets/image/image4 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image5 gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypng .png", "/assets/image/image6. gjhghjgjh gjhgjgjhgjhg jhgjhg jhg jhg hgfyfy t yttypngpng"]
 
   currentPositionPicture = 0;
 

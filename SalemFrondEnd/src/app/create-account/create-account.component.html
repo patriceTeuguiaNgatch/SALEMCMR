@@ -1,15 +1,15 @@
-<div class="tile hero is-ancestor container is-fullhd  is-vertical">
+<div class="tile hero is-ancestor is-vertical">
 
     <div class="tile is-parent">
 
-        <!-- <div class="tile is-child">
+        <div class="tile is-child">
             <article class="">
-                <figure class="image ">
+                <figure class="image is-full is-invisible">
                     <img src={{pictureCreateAccount}}>
                 </figure>
             </article>
-        </div> -->
-        <div class="tile is-12 is-child box">
+        </div>
+        <div class="tile is-6 is-child box">
 
             <div class="tile is-parent">
                 <div class="tile is-child">
@@ -52,6 +52,25 @@
                                 <div *ngIf="validation.lastName.errors.required">Le prenom est requis</div>
                             </div>
                         </div>
+
+                        <div class="field form-group">
+                            <label class="label has-text-left" type="email" for="email"> <strong
+                                    class="has-text-danger">*</strong>
+                                Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input formControlName="email" id="email" class="input form-control" type="text"
+                                    placeholder={{inputEmail}}>
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                            <div *ngIf="validation.email.touched && validation.email.invalid" class="help is-danger">
+                                <p *ngIf="validation.email.errors.required">{{emailIsrequired}}</p>
+                                <p *ngIf="validation.email.errors.email">{{thisEmailIsInvalid}}</p>
+                            </div>
+
+                        </div>
+
                         <div class="field form-group">
                             <label class="label has-text-left" for="firstName"> <strong
                                     class="has-text-danger">*</strong>
@@ -72,24 +91,6 @@
                             </div>
                         </div>
 
-                        <div class="field form-group">
-                            <label class="label has-text-left" type="email" for="email"> <strong
-                                    class="has-text-danger">*</strong>
-                                Email</label>
-                            <div class="control has-icons-left has-icons-right">
-                                <input formControlName="email" id="email" class="input form-control" type="text"
-                                    placeholder={{inputEmail}}>
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
-                            </div>
-                            <div *ngIf="validation.email.touched && validation.email.invalid" class="help is-danger">
-                                <p *ngIf="validation.email.errors.required">{{emailIsrequired}}</p>
-                                <p *ngIf="validation.email.errors.email">{{thisEmailIsInvalid}}</p>
-                            </div>
-
-                        </div>
-
                         <div class="field">
                             <label class="label has-text-left">Téléphone</label>
                             <div class="control">
@@ -108,17 +109,14 @@
                     </form>
                 </div>
             </div>
+            <div *ngIf="hasError" class="tile is-parent">
+                <article class="message is-danger is-small">
+                    <div class="message-body">
+                        {{errorMessage}}
+                    </div>
+                </article>
+            </div>
 
-        </div>
-    </div>
-
-    <div *ngIf="hasError" class="tile is-parent">
-        <div class="tile is-child">
-            <article class="message is-danger is-small">
-                <div class="message-body">
-                    {{errorMessage}}
-                </div>
-            </article>
         </div>
     </div>
 </div>

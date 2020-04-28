@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 import org.salem.controller.account.dto.AccountRequestDto;
+import org.salem.controller.account.dto.AccountSignInDto;
 import org.salem.controller.account.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
+import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.account.AccountService;
@@ -46,12 +48,13 @@ public class AccountController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseDto> createAccountSubscriber(
-            @RequestBody final @Valid AccountRequestDto accountRequestDto) throws InvalidAccountTypeException {
+            @RequestBody final @Valid AccountRequestDto accountRequestDto)
+            throws InvalidAccountTypeException, AccountAlreadyExistException {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.createAccount(accountRequestDto);
-        ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), accountDto, new ErrorDetail());
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), accountDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }
@@ -64,7 +67,7 @@ public class AccountController {
         LOGGER.info("Find all accounts: " + LOGGER.getName());
 
         final List<AccountDto> accountDtos = accountService.findAll();
-        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDtos, new ErrorDetail());
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDtos, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }
@@ -79,7 +82,39 @@ public class AccountController {
         LOGGER.info("Find the account : " + accountId + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.findAccountById(accountId);
-        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
+    @GetMapping(path = "/email", produces = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @Valid
+    public ResponseEntity<ResponseDto> findAccountByEamil(@RequestBody final @Valid AccountRequestDto accountRequestDto)
+            throws ResourceNotFoundException, AccountAlreadyExistException {
+
+        String email = accountRequestDto.getEmail();
+        LOGGER.info("Find the account by email  : " + email + " : " + LOGGER.getName());
+
+        final AccountDto accountDto = accountService.findAccountByEmail(email);
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
+    @PostMapping(path = "/signIn", produces = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    @Valid
+    public ResponseEntity<ResponseDto> singInAccount(@RequestBody final @Valid AccountSignInDto accountSignDto)
+            throws ResourceNotFoundException, AccountAlreadyExistException {
+
+        String email = accountSignDto.getEmail();
+        LOGGER.info("Sign in the account by email  : " + email + " : " + LOGGER.getName());
+
+        final AccountDto accountDto = accountService.singInAccount(accountSignDto);
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }
@@ -94,7 +129,7 @@ public class AccountController {
         LOGGER.info("Update the account : " + accountId + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.updateAccount(accountId, accountRequestDto);
-        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }
@@ -108,7 +143,7 @@ public class AccountController {
         LOGGER.info("Delete the account : " + accountId + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.deleteAccount(accountId);
-        ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }

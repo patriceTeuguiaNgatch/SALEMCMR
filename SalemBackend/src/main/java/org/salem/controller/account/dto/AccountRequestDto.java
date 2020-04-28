@@ -8,15 +8,6 @@ import org.salem.controller.exception.RolePreference;
 
 public class AccountRequestDto {
 
-    @NotNull(message = "Email is required")
-    @Size(max = 30)
-    @Email
-    private String email;
-
-    @NotNull(message = "Password is required")
-    @Size(min = 6, max = 20)
-    private String password;
-
     @NotNull(message = "First name is required")
     @Size(min = 1, max = 30)
     private String firstName;
@@ -24,6 +15,15 @@ public class AccountRequestDto {
     @NotNull(message = "Last name is required")
     @Size(min = 1, max = 30)
     private String lastName;
+
+    @NotNull(message = "Email is required")
+    @Size(max = 30)
+    @Email
+    private String email;
+
+    @NotNull(message = "Password is required")
+    @Size(min = 6, max = 255)
+    private String password;
 
     @Size(max = 15)
     private String phoneNumber;

@@ -47,10 +47,13 @@ export class CreateAccountComponent implements OnInit {
     this.accountService.createAccount(this.accountRegistrationDto).subscribe(response => {
 
       this.httpStatus = response.httpStatus;
-      if (this.iscreated()) {
+      if (this.isCreated() || this.isExist()) {
+        console.log(response);
 
         this.gotoSigIn();
       } else {
+        console.log(response);
+
         this.updateErrorParamater();
       }
     },
@@ -78,8 +81,11 @@ export class CreateAccountComponent implements OnInit {
     this.router.navigate(['signIn']);
   }
 
-  iscreated() {
+  isCreated() {
     return this.httpStatus === "201 CREATED";
+  }
+  isExist() {
+    return this.httpStatus === "302 FOUND";
   }
 
   updateErrorParamater() {

@@ -1,5 +1,5 @@
 import { AccountDto } from './accountDto';
-import { ErrorDetailDto } from './ErrorDetaildto';
+import { ErrorDetailDto } from './errorDetaildto';
 
 export interface ResponseAccountDto {
 

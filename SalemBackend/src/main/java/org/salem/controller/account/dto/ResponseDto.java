@@ -1,6 +1,7 @@
 package org.salem.controller.account.dto;
 
 public class ResponseDto {
+
     private String httpStatus;
     private Object data;
     private Object errorDetail;
