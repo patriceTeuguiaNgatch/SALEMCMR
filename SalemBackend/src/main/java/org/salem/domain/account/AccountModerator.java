@@ -1,11 +1,12 @@
-package org.salem.domain.account;
+// package org.salem.domain.account;
 
-import java.util.Set;
+// import java.util.Set;
 
-public class AccountModerator extends Account {
+// public class AccountModerator extends Account {
 
-    public AccountModerator(String firstName, String lastName, String password, String email, String telephoneNumber,
-            Set<Role> roles) {
-        super(firstName, lastName, password, email, telephoneNumber, roles);
-    }
-}
+// public AccountModerator(String firstName, String lastName, String password,
+// String email, String telephoneNumber,
+// Set<Role> roles) {
+// super(firstName, lastName, password, email, telephoneNumber, roles);
+// }
+// }

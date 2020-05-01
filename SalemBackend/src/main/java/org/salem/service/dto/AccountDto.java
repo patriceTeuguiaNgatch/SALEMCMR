@@ -6,29 +6,25 @@ public class AccountDto {
 
     private String accountId;
 
-    private String firstName;
-
-    private String lastName;
+    private NameDto namedDto;
 
     private String password;
 
     private String email;
 
-    private String phoneNumber;
-
     private Set<String> roles;
+
+    private Set<DonDto> donDtos;
 
     public AccountDto() {
     }
 
-    public AccountDto(String firstName, String lastName, String password, String email, String phoneNumber,
-            Set<String> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public AccountDto(NameDto namedDto, String password, String email, Set<String> roles, Set<DonDto> donDtos) {
+        this.namedDto = namedDto;
         this.password = password;
         this.email = email;
-        this.phoneNumber = phoneNumber;
         this.roles = roles;
+        this.donDtos = donDtos;
     }
 
     public String getAccountId() {
@@ -39,20 +35,12 @@ public class AccountDto {
         this.accountId = accountId;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public NameDto getNameDto() {
+        return this.namedDto;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setNameDto(NameDto nameDto) {
+        this.namedDto = nameDto;
     }
 
     public String getPassword() {
@@ -71,20 +59,20 @@ public class AccountDto {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public Set<String> getRoles() {
         return this.roles;
     }
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public Set<DonDto> getDonDtos() {
+        return this.donDtos;
+    }
+
+    public void setDonDtos(Set<DonDto> donDtos) {
+        this.donDtos = donDtos;
     }
 
 }

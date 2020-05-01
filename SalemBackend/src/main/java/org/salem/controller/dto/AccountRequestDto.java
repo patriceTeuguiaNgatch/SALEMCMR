@@ -1,10 +1,12 @@
-package org.salem.controller.account.dto;
+package org.salem.controller.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class MessageRequestDto {
+import org.salem.controller.exception.RolePreference;
+
+public class AccountRequestDto {
 
     @NotNull(message = "First name is required")
     @Size(min = 1, max = 30)
@@ -19,23 +21,44 @@ public class MessageRequestDto {
     @Email
     private String email;
 
+    @NotNull(message = "Password is required")
+    @Size(min = 6, max = 255)
+    private String password;
+
     @Size(max = 15)
     private String phoneNumber;
 
-    @NotNull(message = "Comment is required")
-    @Size(min = 6, max = 200)
-    private String comment;
+    @NotNull(message = "Role is required")
+    @RolePreference
+    private String role;
 
-    public MessageRequestDto() {
-
+    public AccountRequestDto() {
     }
 
-    public MessageRequestDto(String firstName, String lastName, String email, String phoneNumber, String message) {
+    public AccountRequestDto(String firstName, String lastName, String password, String email, String phoneNumber,
+            String role) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.comment = message;
+        this.role = role;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -54,14 +77,6 @@ public class MessageRequestDto {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
@@ -70,12 +85,12 @@ public class MessageRequestDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getComment() {
-        return this.comment;
+    public String getRole() {
+        return this.role;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

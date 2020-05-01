@@ -7,14 +7,20 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.salem.domain.don.Don;
+import org.salem.domain.don.Name;
 
 @Entity
 @Table(name = "accounts")
@@ -27,11 +33,8 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
 
-    @Column(name = "firstName", nullable = false)
-    private String firstName;
-
-    @Column(name = "lastName", nullable = false)
-    private String lastName;
+    @Embedded
+    private Name name;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -46,21 +49,20 @@ public class Account implements Serializable {
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_Id", referencedColumnName = "accountId"), inverseJoinColumns = @JoinColumn(name = "role_Id", referencedColumnName = "roleId"))
     private Set<Role> roles = new HashSet<>();
 
-    // @OneToMany(mappedBy = "accounts", fetch = FetchType.LAZY, cascade =
-    // CascadeType.ALL)
-    // private Set<Don> dons = new HashSet<>();
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private Set<Don> dons;
 
     public Account() {
+        this.dons = new HashSet<>();
     }
 
-    public Account(String firstName, String lastName, String password, String email, String phoneNumber,
-            Set<Role> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Account(Name name, String password, String email, String phoneNumber, Set<Role> roles) {
+        this.name = name;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.roles = roles;
+        this.dons = new HashSet<>();
     }
 
     public Long getAccountId() {
@@ -71,20 +73,12 @@ public class Account implements Serializable {
         this.accountId = accountId;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public Name getName() {
+        return this.name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -117,6 +111,17 @@ public class Account implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Don> getDons() {
+        return this.dons;
+    }
+
+    public void setDons(Set<Don> dons) {
+        this.dons = dons;
+        for (Don don : dons) {
+            don.setAccount(this);
+        }
     }
 
     public void addRoles(Role role) {
@@ -154,22 +159,15 @@ public class Account implements Serializable {
             return false;
         }
         Account account = (Account) o;
-        return Objects.equals(accountId, account.accountId) && Objects.equals(firstName, account.firstName)
-                && Objects.equals(lastName, account.lastName) && Objects.equals(password, account.password)
-                && Objects.equals(email, account.email) && Objects.equals(phoneNumber, account.phoneNumber)
-                && Objects.equals(roles, account.roles);
+        return Objects.equals(accountId, account.accountId) && Objects.equals(name, account.name)
+                && Objects.equals(password, account.password) && Objects.equals(email, account.email)
+                && Objects.equals(phoneNumber, account.phoneNumber) && Objects.equals(roles, account.roles)
+                && Objects.equals(dons, account.dons);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountId, firstName, lastName, password, email, phoneNumber, roles);
-    }
-
-    @Override
-    public String toString() {
-        return "{" + " id='" + getAccountId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
-                + getLastName() + "'" + ", password='" + getPassword() + "'" + ", email='" + getEmail() + "'"
-                + ", phoneNumber='" + getPhoneNumber() + "'" + ", roles='" + getRoles() + "'" + "}";
+        return Objects.hash(accountId, name, password, email, phoneNumber, roles, dons);
     }
 
 }

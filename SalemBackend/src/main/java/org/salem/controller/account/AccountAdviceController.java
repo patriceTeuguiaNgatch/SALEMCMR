@@ -6,10 +6,11 @@ import java.util.List;
 
 import javax.validation.ConstraintViolationException;
 
-import org.salem.controller.account.dto.ResponseDto;
+import org.salem.controller.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
+import org.salem.domain.exception.InvalidDonTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,6 +86,18 @@ public class AccountAdviceController {
         public ResponseEntity<?> handleInvalidAccountTypeException(
                         InvalidAccountTypeException invalidAccountTypeException, WebRequest request) {
                 ErrorDetail errorDetail = new ErrorDetail(new Date(), invalidAccountTypeException.getMessage(),
+                                request.getDescription(false));
+                ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetail);
+
+                return ResponseEntity.accepted().body(responseDto);
+        }
+
+        @ExceptionHandler(InvalidDonTypeException.class)
+        @ResponseStatus(HttpStatus.BAD_REQUEST)
+        @ResponseBody
+        public ResponseEntity<?> handleInvalidDonTypeException(InvalidDonTypeException invalidDonTypeException,
+                        WebRequest request) {
+                ErrorDetail errorDetail = new ErrorDetail(new Date(), invalidDonTypeException.getMessage(),
                                 request.getDescription(false));
                 ResponseDto responseDto = new ResponseDto(HttpStatus.BAD_REQUEST.toString(), null, errorDetail);
 

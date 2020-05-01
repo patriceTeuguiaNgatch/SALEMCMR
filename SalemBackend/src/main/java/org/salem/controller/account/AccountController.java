@@ -6,15 +6,17 @@ import java.util.logging.Logger;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
-import org.salem.controller.account.dto.AccountRequestDto;
-import org.salem.controller.account.dto.AccountSignInDto;
-import org.salem.controller.account.dto.ResponseDto;
+import org.salem.controller.dto.AccountRequestDto;
+import org.salem.controller.dto.AccountSignInDto;
+import org.salem.controller.dto.DonRequestDto;
+import org.salem.controller.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.account.AccountService;
 import org.salem.service.dto.AccountDto;
+import org.salem.service.dto.DonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -144,6 +146,21 @@ public class AccountController {
 
         final AccountDto accountDto = accountService.deleteAccount(accountId);
         final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
+    @PostMapping(path = "/don", produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ResponseDto> createDon(@RequestBody final @Valid DonRequestDto donRequestDto)
+            throws Exception {
+
+        LOGGER.info("Create the don : " + donRequestDto.getFirstName() + " : " + LOGGER.getName());
+
+        final DonDto donDto = this.accountService.createDon(donRequestDto);
+
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }

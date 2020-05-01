@@ -1,4 +1,4 @@
-package org.salem.controller.account.dto;
+package org.salem.controller.dto;
 
 public class ResponseDto {
 

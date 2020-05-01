@@ -1,198 +1,148 @@
-// package org.salem.domain.don;
+package org.salem.domain.don;
 
-// import java.io.Serializable;
-// import java.util.HashSet;
-// import java.util.Objects;
-// import java.util.Set;
+import java.io.Serializable;
+import java.util.Objects;
 
-// import javax.persistence.Column;
-// import javax.persistence.Entity;
-// import javax.persistence.FetchType;
-// import javax.persistence.GeneratedValue;
-// import javax.persistence.Id;
-// import javax.persistence.JoinColumn;
-// import javax.persistence.ManyToOne;
-// import javax.persistence.Table;
-// import org.salem.domain.account.Account;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-// @Entity
-// @Table(name = "dons")
-// public class Don implements Serializable {
+import org.salem.domain.account.Account;
 
-// private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "dons")
+public class Don implements Serializable {
 
-// @Id
-// @Column(name = "donId")
-// @GeneratedValue
-// private Long donId;
+    private static final long serialVersionUID = 1L;
 
-// @Column(name = "roadNumber")
-// private String roadNumber;
+    @Id
+    @Column(name = "donId")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long donId;
 
-// @Column(name = "town")
-// private String town;
+    @Embedded
+    private Address Address;
 
-// @Column(name = "postalCode")
-// private String postalCode;
+    @Column(name = "king")
+    private String king;
 
-// @Column(name = "phoneNumber")
-// private String phoneNumber;
+    @Column(name = "comment")
+    private String comment;
 
-// @Column(name = "country")
-// private String country;
+    @Column(name = "isConfidential")
+    private boolean isConfidential;
 
-// @Column(name = "king")
-// private String king;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "eDon")
+    private Edon eDon;
 
-// @Column(name = "comments")
-// private String comments;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_don_id", referencedColumnName = "accountId")
+    private Account account;
 
-// @Column(name = "isConfidential")
-// private Boolean isConfidential;
+    public Don() {
+    }
 
-// @ManyToOne(fetch = FetchType.LAZY, optional = false)
-// @JoinColumn(name = "acaount_id", nullable = false)
-// private Set<Account> Accounts = new HashSet<>();
+    public Don(final Address Address, final String king, final String comment, final boolean isConfidential,
+            final Edon eDon) {
+        this.Address = Address;
+        this.king = king;
+        this.comment = comment;
+        this.isConfidential = isConfidential;
+        this.eDon = eDon;
+    }
 
-// public Don() {
-// }
+    public Long getDonId() {
+        return this.donId;
+    }
 
-// public Don(Long donId, String roadNumber, String town, String postalCode,
-// String phoneNumber, String country,
-// String king, String comments, Boolean isConfidential, Set<Account> Accounts)
-// {
-// this.donId = donId;
-// this.roadNumber = roadNumber;
-// this.town = town;
-// this.postalCode = postalCode;
-// this.phoneNumber = phoneNumber;
-// this.country = country;
-// this.king = king;
-// this.comments = comments;
-// this.isConfidential = isConfidential;
-// this.Accounts = Accounts;
-// }
+    public void setDonId(final Long donId) {
+        this.donId = donId;
+    }
 
-// public Long getDonId() {
-// return this.donId;
-// }
+    public Address getAddress() {
+        return this.Address;
+    }
 
-// public void setDonId(Long donId) {
-// this.donId = donId;
-// }
+    public void setAddress(final Address Address) {
+        this.Address = Address;
+    }
 
-// public String getRoadNumber() {
-// return this.roadNumber;
-// }
+    public String getKing() {
+        return this.king;
+    }
 
-// public void setRoadNumber(String roadNumber) {
-// this.roadNumber = roadNumber;
-// }
+    public void setKing(final String king) {
+        this.king = king;
+    }
 
-// public String getTown() {
-// return this.town;
-// }
+    public String getComment() {
+        return this.comment;
+    }
 
-// public void setTown(String town) {
-// this.town = town;
-// }
+    public void setComment(final String comment) {
+        this.comment = comment;
+    }
 
-// public String getPostalCode() {
-// return this.postalCode;
-// }
+    public boolean isIsConfidential() {
+        return this.isConfidential;
+    }
 
-// public void setPostalCode(String postalCode) {
-// this.postalCode = postalCode;
-// }
+    public boolean getIsConfidential() {
+        return this.isConfidential;
+    }
 
-// public String getPhoneNumber() {
-// return this.phoneNumber;
-// }
+    public void setIsConfidential(final boolean isConfidential) {
+        this.isConfidential = isConfidential;
+    }
 
-// public void setPhoneNumber(String phoneNumber) {
-// this.phoneNumber = phoneNumber;
-// }
+    public Account getAccount() {
+        return this.account;
+    }
 
-// public String getCountry() {
-// return this.country;
-// }
+    public void setAccount(final Account account) {
+        this.account = account;
+        account.getDons().add(this);
+    }
 
-// public void setCountry(String country) {
-// this.country = country;
-// }
+    public Edon getEDon() {
+        return this.eDon;
+    }
 
-// public String getKing() {
-// return this.king;
-// }
+    public void setEDon(final Edon eDon) {
+        this.eDon = eDon;
+    }
 
-// public void setKing(String king) {
-// this.king = king;
-// }
+    public Boolean isConfidential() {
+        return this.isConfidential;
+    }
 
-// public String getComments() {
-// return this.comments;
-// }
+    @Override
+    public boolean equals(final Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Don)) {
+            return false;
+        }
+        final Don don = (Don) o;
+        return Objects.equals(donId, don.donId) && Objects.equals(Address, don.Address)
+                && Objects.equals(king, don.king) && Objects.equals(comment, don.comment)
+                && isConfidential == don.isConfidential && Objects.equals(eDon, don.eDon)
+                && Objects.equals(account, don.account);
+    }
 
-// public void setComments(String comments) {
-// this.comments = comments;
-// }
+    @Override
+    public int hashCode() {
+        return Objects.hash(donId, Address, king, comment, isConfidential, eDon, account);
+    }
 
-// public Boolean isIsConfidential() {
-// return this.isConfidential;
-// }
-
-// public Boolean getIsConfidential() {
-// return this.isConfidential;
-// }
-
-// public void setIsConfidential(Boolean isConfidential) {
-// this.isConfidential = isConfidential;
-// }
-
-// public Set<Account> getAccounts() {
-// return this.Accounts;
-// }
-
-// public void setAccounts(Set<Account> Accounts) {
-// this.Accounts = Accounts;
-// }
-
-// @Override
-// public boolean equals(Object o) {
-// if (o == this)
-// return true;
-// if (!(o instanceof Don)) {
-// return false;
-// }
-// Don don = (Don) o;
-// return Objects.equals(donId, don.donId) && Objects.equals(roadNumber,
-// don.roadNumber)
-// && Objects.equals(town, don.town) && Objects.equals(postalCode,
-// don.postalCode)
-// && Objects.equals(phoneNumber, don.phoneNumber) && Objects.equals(country,
-// don.country)
-// && Objects.equals(king, don.king) && Objects.equals(comments, don.comments)
-// && Objects.equals(isConfidential, don.isConfidential) &&
-// Objects.equals(Accounts, don.Accounts);
-// }
-
-// @Override
-// public int hashCode() {
-// return Objects.hash(donId, roadNumber, town, postalCode, phoneNumber,
-// country, king, comments, isConfidential,
-// Accounts);
-// }
-
-// @Override
-// public String toString() {
-// return "{" + " donId='" + getDonId() + "'" + ", roadNumber='" +
-// getRoadNumber() + "'" + ", town='" + getTown()
-// + "'" + ", postalCode='" + getPostalCode() + "'" + ", phoneNumber='" +
-// getPhoneNumber() + "'"
-// + ", country='" + getCountry() + "'" + ", king='" + getKing() + "'" + ",
-// comments='" + getComments()
-// + "'" + ", isConfidential='" + isIsConfidential() + "'" + ", Accounts='" +
-// getAccounts() + "'" + "}";
-// }
-
-// }
+}

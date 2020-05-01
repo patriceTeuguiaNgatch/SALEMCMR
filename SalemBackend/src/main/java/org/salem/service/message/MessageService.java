@@ -2,7 +2,7 @@ package org.salem.service.message;
 
 import java.util.logging.Logger;
 
-import org.salem.controller.account.dto.MessageRequestDto;
+import org.salem.controller.dto.MessageRequestDto;
 import org.salem.domain.message.Message;
 import org.salem.domain.message.MessageRepository;
 import org.salem.service.assemler.MessageAssembler;

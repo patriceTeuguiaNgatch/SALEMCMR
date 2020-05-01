@@ -1,4 +1,4 @@
-package org.salem.controller.account.dto;
+package org.salem.controller.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

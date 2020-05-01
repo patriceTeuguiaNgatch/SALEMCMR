@@ -4,12 +4,13 @@ import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
-import org.salem.controller.account.dto.MessageRequestDto;
-import org.salem.controller.account.dto.ResponseDto;
+import org.salem.controller.dto.MessageRequestDto;
+import org.salem.controller.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.service.dto.MessageDto;
 import org.salem.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping(path = "message")

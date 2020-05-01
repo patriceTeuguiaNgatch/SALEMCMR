@@ -8,23 +8,30 @@ import java.util.Set;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.Role;
 import org.salem.service.dto.AccountDto;
+import org.salem.service.dto.NameDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountAssembler {
 
-    public AccountAssembler() {
+    @Autowired
+    private final NameAssembler nameAssembler;
+
+    public AccountAssembler(final NameAssembler nameAssembler) {
+        this.nameAssembler = nameAssembler;
     }
 
     public AccountDto create(Account account) {
 
         AccountDto accountDto = new AccountDto();
         accountDto.setAccountId(account.getAccountId().toString());
+
+        NameDto nameDto = this.nameAssembler.create(account.getName());
+        accountDto.setNameDto(nameDto);
+
         accountDto.setEmail(account.getEmail());
-        accountDto.setFirstName(account.getFirstName());
-        accountDto.setLastName(account.getLastName());
         accountDto.setPassword(account.getPassword());
-        accountDto.setPhoneNumber(account.getPhoneNumber());
         Set<String> roles = this.createListRole(account.getRoles());
         accountDto.setRoles(roles);
 
