@@ -8,6 +8,7 @@ import org.salem.domain.don.Don;
 import org.salem.domain.don.DonRepository;
 import org.salem.domain.dto.DonPersistDto;
 import org.salem.domain.exception.InvalidDonTypeException;
+import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.assemler.DonAssembler;
 import org.salem.service.dto.DonDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,17 @@ public class DonService {
 
     public List<DonDto> findAllDon() {
         List<DonPersistDto> donPersists = this.donRepository.findAllDon();
+        List<Don> dons = this.donAssembler.createListDon(donPersists);
+        List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
+
+        return donDtos;
+    }
+
+    public List<DonDto> findDonByEmail(final String email) throws ResourceNotFoundException {
+        List<DonPersistDto> donPersists = this.donRepository.findDonByEmail(email);
+        if (donPersists.size() == 0) {
+            throw new ResourceNotFoundException("Don not found for this email : " + email);
+        }
         List<Don> dons = this.donAssembler.createListDon(donPersists);
         List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
 

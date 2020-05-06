@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import org.salem.controller.dto.AccountRequestDto;
 import org.salem.controller.dto.AccountSignInDto;
@@ -90,14 +92,14 @@ public class AccountController {
         return ResponseEntity.accepted().body(responseDto);
     }
 
-    @GetMapping(path = "/email", produces = "application/json")
+    @GetMapping(path = "/email/{email}", produces = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @Valid
-    public ResponseEntity<ResponseDto> findAccountByEamil(@RequestBody final @Valid AccountRequestDto accountRequestDto)
+    public ResponseEntity<ResponseDto> findAccountByEamil(
+            @PathVariable(value = "email") @NotNull(message = "Last name is required") @Size(max = 30) final String email)
             throws ResourceNotFoundException, AccountAlreadyExistException {
 
-        String email = accountRequestDto.getEmail();
         LOGGER.info("Find the account by email  : " + email + " : " + LOGGER.getName());
 
         final AccountDto accountDto = accountService.findAccountByEmail(email);
