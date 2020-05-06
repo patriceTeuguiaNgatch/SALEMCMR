@@ -13,13 +13,16 @@ public class Address {
 
     private String zipCode;
 
+    private String phoneNumber;
+
     public Address() {
     }
 
-    public Address(String roadNumber, String town, String zipCode) {
+    public Address(String roadNumber, String town, String zipCode, String phoneNumber) {
         this.roadNumber = roadNumber;
         this.town = town;
         this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getRoadNumber() {
@@ -46,6 +49,14 @@ public class Address {
         this.zipCode = zipCode;
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -55,12 +66,18 @@ public class Address {
         }
         Address address = (Address) o;
         return Objects.equals(roadNumber, address.roadNumber) && Objects.equals(town, address.town)
-                && Objects.equals(zipCode, address.zipCode);
+                && Objects.equals(zipCode, address.zipCode) && Objects.equals(phoneNumber, address.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roadNumber, town, zipCode);
+        return Objects.hash(roadNumber, town, zipCode, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "{" + " roadNumber='" + getRoadNumber() + "'" + ", town='" + getTown() + "'" + ", zipCode='"
+                + getZipCode() + "'" + ", phoneNumber='" + getPhoneNumber() + "'" + "}";
     }
 
 }

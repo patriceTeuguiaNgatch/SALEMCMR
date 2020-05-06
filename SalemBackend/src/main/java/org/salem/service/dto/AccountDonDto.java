@@ -1,6 +1,6 @@
 package org.salem.service.dto;
 
-public class DonDto {
+public class AccountDonDto {
 
     private String donId;
 
@@ -12,21 +12,18 @@ public class DonDto {
 
     private boolean isConfidential;
 
-    private DonAccountDto donAccountDto;
-
     private String edon;
 
-    public DonDto() {
+    public AccountDonDto() {
     }
 
-    public DonDto(String donId, String email, AddressDto addressDto, String kind, String comment,
-            boolean isConfidential, DonAccountDto donAccountDto) {
+    public AccountDonDto(String donId, String email, AddressDto addressDto, String kind, String comment,
+            boolean isConfidential) {
         this.donId = donId;
         this.addressDto = addressDto;
         this.kind = kind;
         this.comment = comment;
         this.isConfidential = isConfidential;
-        this.donAccountDto = donAccountDto;
     }
 
     public String getDonId() {
@@ -45,12 +42,12 @@ public class DonDto {
         this.addressDto = addressDto;
     }
 
-    public String getKing() {
+    public String getKind() {
         return this.kind;
     }
 
-    public void setKind(String king) {
-        this.kind = king;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public String getComment() {
@@ -79,14 +76,6 @@ public class DonDto {
 
     public void setEdon(String edon) {
         this.edon = edon;
-    }
-
-    public DonAccountDto getDonAccountDto() {
-        return this.donAccountDto;
-    }
-
-    public void setDonAccountDto(DonAccountDto donAccountDto) {
-        this.donAccountDto = donAccountDto;
     }
 
 }

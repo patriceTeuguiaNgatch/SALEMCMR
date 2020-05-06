@@ -3,6 +3,7 @@ package org.salem.domain.don;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.salem.domain.account.Account;
 
 @Entity
@@ -30,10 +33,10 @@ public class Don implements Serializable {
     private Long donId;
 
     @Embedded
-    private Address Address;
+    private Address address;
 
     @Column(name = "king")
-    private String king;
+    private String kind;
 
     @Column(name = "comment")
     private String comment;
@@ -45,17 +48,18 @@ public class Don implements Serializable {
     @Column(name = "eDon")
     private Edon eDon;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_don_id", referencedColumnName = "accountId")
+    @Fetch(FetchMode.JOIN)
     private Account account;
 
     public Don() {
     }
 
-    public Don(final Address Address, final String king, final String comment, final boolean isConfidential,
+    public Don(final Address address, final String kind, final String comment, final boolean isConfidential,
             final Edon eDon) {
-        this.Address = Address;
-        this.king = king;
+        this.address = address;
+        this.kind = kind;
         this.comment = comment;
         this.isConfidential = isConfidential;
         this.eDon = eDon;
@@ -70,19 +74,19 @@ public class Don implements Serializable {
     }
 
     public Address getAddress() {
-        return this.Address;
+        return this.address;
     }
 
-    public void setAddress(final Address Address) {
-        this.Address = Address;
+    public void setAddress(final Address address) {
+        this.address = address;
     }
 
-    public String getKing() {
-        return this.king;
+    public String getKind() {
+        return this.kind;
     }
 
-    public void setKing(final String king) {
-        this.king = king;
+    public void setKind(final String king) {
+        this.kind = king;
     }
 
     public String getComment() {
@@ -134,15 +138,15 @@ public class Don implements Serializable {
             return false;
         }
         final Don don = (Don) o;
-        return Objects.equals(donId, don.donId) && Objects.equals(Address, don.Address)
-                && Objects.equals(king, don.king) && Objects.equals(comment, don.comment)
+        return Objects.equals(donId, don.donId) && Objects.equals(address, don.address)
+                && Objects.equals(kind, don.kind) && Objects.equals(comment, don.comment)
                 && isConfidential == don.isConfidential && Objects.equals(eDon, don.eDon)
                 && Objects.equals(account, don.account);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(donId, Address, king, comment, isConfidential, eDon, account);
+        return Objects.hash(donId, address, kind, comment, isConfidential, eDon, account);
     }
 
 }

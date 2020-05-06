@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.salem.domain.don.Don;
 import org.salem.domain.don.Name;
@@ -49,7 +50,8 @@ public class Account implements Serializable {
     @JoinTable(name = "accounts_roles", joinColumns = @JoinColumn(name = "account_Id", referencedColumnName = "accountId"), inverseJoinColumns = @JoinColumn(name = "role_Id", referencedColumnName = "roleId"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @Transient
+    @OneToMany(targetEntity = Don.class, mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Don> dons;
 
     public Account() {
@@ -63,6 +65,15 @@ public class Account implements Serializable {
         this.phoneNumber = phoneNumber;
         this.roles = roles;
         this.dons = new HashSet<>();
+    }
+
+    public Account(Name name, String password, String email, String phoneNumber, Set<Role> roles, Set<Don> dons) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.roles = roles;
+        this.dons = dons;
     }
 
     public Long getAccountId() {

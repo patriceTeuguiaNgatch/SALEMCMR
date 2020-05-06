@@ -25,7 +25,7 @@ public class AccountRequestDto {
     @Size(min = 6, max = 255)
     private String password;
 
-    @Size(max = 15)
+    @Size(max = 20)
     private String phoneNumber;
 
     @NotNull(message = "Role is required")

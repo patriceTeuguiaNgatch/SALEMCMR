@@ -17,6 +17,7 @@ public class AddressAssembler {
         addressDto.setRoadNumber(address.getRoadNumber());
         addressDto.setTown(address.getTown());
         addressDto.setZipCode(address.getZipCode());
+        addressDto.setPhoneNumber(address.getPhoneNumber());
 
         return addressDto;
     }

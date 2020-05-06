@@ -13,6 +13,7 @@ import org.salem.controller.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
+import org.salem.domain.exception.InvalidDonTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.account.AccountService;
 import org.salem.service.dto.AccountDto;
@@ -154,7 +155,7 @@ public class AccountController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseDto> createDon(@RequestBody final @Valid DonRequestDto donRequestDto)
-            throws Exception {
+            throws InvalidDonTypeException, InvalidAccountTypeException {
 
         LOGGER.info("Create the don : " + donRequestDto.getFirstName() + " : " + LOGGER.getName());
 

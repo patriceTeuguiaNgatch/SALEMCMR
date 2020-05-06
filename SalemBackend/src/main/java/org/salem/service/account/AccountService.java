@@ -166,37 +166,43 @@ public class AccountService {
         final String email = donRequestDto.getEmail();
 
         LOGGER.info("Create don : " + email + " : " + LOGGER.getName());
-
         DonDto donDto = new DonDto();
-        final Don don = this.donService.Create(donRequestDto);
 
         final Account accountFind = this.accountRepository.findByEmail(email);
         if (accountFind != null && accountFind.hasEmail(email)) {
-            final Don donSave = donService.save(don);
-
+            final Don don = this.donService.Create(donRequestDto);
             don.setAccount(accountFind);
-            // final Don donSave = donService.save(don);
+            final Don donSave = donService.save(don);
             this.accountRepository.save(accountFind);
             donDto = this.donService.Create(donSave);
         } else {
-            final String firstName = donRequestDto.getFirstName();
-            final String lastName = donRequestDto.getLastName();
-            final String password = "password";
-            final String phoneNumber = donRequestDto.getPhoneNumber();
-            final String roleSubscriber = ERole.ROLE_SUBSCRIBER.toString();
-
-            final AccountRequestDto accountRequestDto = new AccountRequestDto(firstName, lastName, password, email,
-                    phoneNumber, roleSubscriber);
-            final Account accountCreate = this.accountFactory.create(accountRequestDto);
-            // don.setAccount(accountCreate);
-            this.accountRepository.save(accountCreate);
-
-            // don.setAccount(accountCreate);
-            // final Don donSave = donService.save(don);
-            donDto = this.donService.Create(don);
-
+            donDto = this.createDonAccountNotExist(donRequestDto);
         }
 
         return donDto;
+    }
+
+    private DonDto createDonAccountNotExist(final DonRequestDto donRequestDto)
+            throws InvalidDonTypeException, InvalidAccountTypeException {
+
+        final Don don = this.donService.Create(donRequestDto);
+
+        final String firstName = donRequestDto.getFirstName();
+        final String lastName = donRequestDto.getLastName();
+        final String password = "password";
+        final String phoneNumber = donRequestDto.getPhoneNumber();
+        final String roleSubscriber = ERole.ROLE_SUBSCRIBER.toString();
+        final String email = donRequestDto.getEmail();
+
+        final AccountRequestDto accountRequestDto = new AccountRequestDto(firstName, lastName, password, email,
+                phoneNumber, roleSubscriber);
+        final Account accountCreate = this.accountFactory.create(accountRequestDto);
+        don.setAccount(accountCreate);
+
+        this.accountRepository.save(accountCreate);
+        final Don donSave = this.donService.save(don);
+
+        return this.donService.Create(donSave);
+
     }
 }

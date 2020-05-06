@@ -39,18 +39,17 @@ public class DonRequestDto {
     @Size(max = 100)
     private String comment;
 
-    @NotNull(message = "First name is required")
     private boolean isConfidential;
 
     @NotNull(message = "Don type is required")
     @DonPreference
-    private String eDon;
+    private String edon;
 
     public DonRequestDto() {
     }
 
     public DonRequestDto(String firstName, String lastName, String email, String roadNumber, String town,
-            String zipCode, String phoneNumber, String king, String comment, boolean isConfidential) {
+            String zipCode, String phoneNumber, String king, String comment, boolean isConfidential, String edon) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -61,6 +60,7 @@ public class DonRequestDto {
         this.king = king;
         this.comment = comment;
         this.isConfidential = isConfidential;
+        this.edon = edon;
     }
 
     public String getFirstName() {
@@ -147,11 +147,12 @@ public class DonRequestDto {
         this.isConfidential = isConfidential;
     }
 
-    public String getEDon() {
-        return this.eDon;
+    public String getEdon() {
+        return this.edon;
     }
 
-    public void setEDon(String eDon) {
-        this.eDon = eDon;
+    public void setEdon(String edon) {
+        this.edon = edon;
     }
+
 }

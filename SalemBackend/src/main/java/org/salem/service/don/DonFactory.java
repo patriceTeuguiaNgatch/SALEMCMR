@@ -19,8 +19,8 @@ public class DonFactory {
     public Don create(DonRequestDto donRequestDto) throws InvalidDonTypeException {
 
         Address address = new Address(donRequestDto.getRoadNumber(), donRequestDto.getTown(),
-                donRequestDto.getZipCode());
-        String edon = donRequestDto.getEDon();
+                donRequestDto.getZipCode(), donRequestDto.getPhoneNumber());
+        String edon = donRequestDto.getEdon();
 
         if (edon.equals(eDonFinancial.toString())) {
             return new Don(address, donRequestDto.getKing(), donRequestDto.getComment(),

@@ -14,17 +14,18 @@ public class AccountDto {
 
     private Set<String> roles;
 
-    private Set<DonDto> donDtos;
+    private Set<AccountDonDto> accountDonDtos;
 
     public AccountDto() {
     }
 
-    public AccountDto(NameDto namedDto, String password, String email, Set<String> roles, Set<DonDto> donDtos) {
+    public AccountDto(NameDto namedDto, String password, String email, Set<String> roles,
+            Set<AccountDonDto> accountDonDtos) {
         this.namedDto = namedDto;
         this.password = password;
         this.email = email;
         this.roles = roles;
-        this.donDtos = donDtos;
+        this.accountDonDtos = accountDonDtos;
     }
 
     public String getAccountId() {
@@ -67,12 +68,12 @@ public class AccountDto {
         this.roles = roles;
     }
 
-    public Set<DonDto> getDonDtos() {
-        return this.donDtos;
+    public Set<AccountDonDto> getAccountDonDtos() {
+        return this.accountDonDtos;
     }
 
-    public void setDonDtos(Set<DonDto> donDtos) {
-        this.donDtos = donDtos;
+    public void setAccountDonDtos(Set<AccountDonDto> accountDonDtos) {
+        this.accountDonDtos = accountDonDtos;
     }
 
 }
