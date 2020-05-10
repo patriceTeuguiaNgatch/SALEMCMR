@@ -5,8 +5,8 @@ import { CreateAccoutComponent } from './account/create-accout/create-accout.com
 import { DonComponent } from './don/don.component';
 import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
-import { DonMaterielComponent } from './don-materiel/don-materiel.component';
-import { DonFinancierComponent } from './don-financier/don-financier.component';
+import { DonMaterialComponent } from './don-material/don-material.component';
+import { DonFinancialComponent } from './don-financial/don-financial.component';
 import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
 import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'accounts', component: AccountListComponent, data: { title: 'accounts list' } },
   { path: 'create', component: CreateAccoutComponent, data: { title: 'create account' } },
   { path: 'don', component: DonComponent, data: { title: 'make donation' } },
-  { path: 'donMateriel', component: DonMaterielComponent, data: { title: 'donation materiel' } },
-  { path: 'donFinancier', component: DonFinancierComponent, data: { title: 'donation financier' } },
+  { path: 'donMateriel', component: DonMaterialComponent, data: { title: 'donation materiel' } },
+  { path: 'donFinancier', component: DonFinancialComponent, data: { title: 'donation financier' } },
   { path: 'home', component: HomeComponent, data: { title: 'home page' } },
   { path: 'remerciement', component: RemerciementComponent, data: { title: 'remerciement' } },
   { path: 'contact', component: ContactComponent, data: { title: 'contact' } },

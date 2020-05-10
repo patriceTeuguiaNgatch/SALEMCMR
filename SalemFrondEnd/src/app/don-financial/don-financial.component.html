@@ -1,0 +1,243 @@
+<div class="container box">
+    <form [formGroup]="form">
+        <div class="field">
+            <p class="subtitle"><strong class="has-text-primary">Je donne à SALEM</strong></p>
+        </div>
+
+        <div class="field">
+            <p class="has-text-left help"> <strong class="has-text-danger">*</strong> Champ obligatoire</p>
+            <progress class="progress is-info is-small" value="100" max="100"></progress>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{identification}}</strong></p>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field form-group">
+                    <label class="label has-text-left" for="firstName"><strong class="has-text-danger">*</strong>
+                        {{firstName}}</label>
+                    <div class="control has-icons-left">
+                        <input formControlName="firstName" class="input form-control" type="text" id="firstName"
+                            placeholder={{inputFirstName}}>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+
+                    <div *ngIf="validation.firstName.touched && validation.firstName.invalid" class="help is-danger">
+                        <div *ngIf="validation.firstName.errors.required">Le nom est requis</div>
+                    </div>
+                </div>
+
+                <div class="field form-group">
+                    <label class="label has-text-left" for="firstName"> <strong class="has-text-danger">*</strong>
+                        {{lastName}}</label>
+                    <div class="control  has-icons-left">
+                        <input formControlName="lastName" class="input form-control" type="text" id="lastName"
+                            placeholder={{inputLastName}}>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="validation.lastName.touched && validation.lastName.invalid" class="help is-danger">
+                        <div *ngIf="validation.lastName.errors.required">Le prenom est requis</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field form-group">
+                    <label class="label has-text-left" type="email" for="email"> <strong
+                            class="has-text-danger">*</strong>
+                        {{email}}</label>
+                    <div class="control has-icons-left">
+                        <input formControlName="email" id="email" class="input form-control" type="text"
+                            placeholder={{inputEmail}}>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                    <div *ngIf="validation.email.touched && validation.email.invalid" class="help is-danger">
+                        <p *ngIf="validation.email.errors.required">{{emailIsrequired}}</p>
+                        <p *ngIf="validation.email.errors.email">{{thisEmailIsInvalid}}</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="field form-group">
+            <label class="label has-text-left" for="value"><strong class="has-text-danger">*</strong>
+                {{value}}</label>
+
+            <div class="field has-addons has-addons-centered">
+                <div class="control">
+                    <div class="select">
+                        <select formControlName="currency" class="form-control" id="currency">
+                            <option>Choississez la devise</option>
+                            <option *ngFor="let currency of currencyList;">{{currency.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control">
+                    <input formControlName="value" class="input form-control" type="text" id="value"
+                        placeholder={{inputvalue}}>
+                </div>
+            </div>
+            <div *ngIf="validation.value.touched && validation.value.invalid" class="help is-danger">
+                <div *ngIf="validation.value.errors.required">Le montant est requis</div>
+            </div>
+            <div *ngIf="validation.currency.touched && validation.currency.invalid" class="help is-danger">
+                <div *ngIf="validation.currency.errors.required">La devise est requise</div>
+            </div>
+        </div>
+
+        <div class="field form-group">
+            <div class="field is-horizontal">
+                <div class="field-body">
+                    <label class="label has-text-left" for="creditCard"><strong class="has-text-danger">*</strong>
+                        {{creditInformation}}</label>
+                    <i class="field fab fa-cc-visa fa-2x color-navy"></i>
+                    <i class="field fab fa-cc-amex fa-2x color-bleu"></i>
+                    <i class="field fab fa-cc-mastercard fa-2x color-red"></i>
+                    <i class="field fab fa-cc-discover fa-2x color-orange"></i>
+                    <i class="field fab fa-cc-jcb fa-2x color-cadetblue"></i>
+                </div>
+            </div>
+
+            <div class="control has-icons-left">
+                <input formControlName="creditCard" class="input form-control" type="text" id="creditCard"
+                    placeholder={{inputCreditCard}}>
+                <span class="icon is-small is-left"><i class="far fa-credit-card"></i></span>
+            </div>
+            <div *ngIf="validation.creditCard.touched && validation.creditCard.invalid" class="help is-danger">
+                <div *ngIf="validation.creditCard.errors.required">Le numero de la carte est requis</div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-body">
+                <div class="field form-group">
+                    <label class="label has-text-left" for="expirationYear"><strong class="has-text-danger">*</strong>
+                        {{expirationYear}}</label>
+                    <div class="control">
+                        <input formControlName="expirationYear" class="input form-control" type="text"
+                            id="expirationYear" placeholder={{inputYear}}>
+                    </div>
+                    <div *ngIf="validation.expirationYear.touched && validation.expirationYear.invalid"
+                        class="help is-danger">
+                        <div *ngIf="validation.expirationYear.errors.required">L'année d'expiration de la carte est
+                            requise</div>
+                    </div>
+                </div>
+
+                <div class="field form-group">
+                    <label class="label has-text-left" for="expirationMonth"><strong class="has-text-danger">*</strong>
+                        {{expirationMonth}}</label>
+                    <div class="control">
+                        <input formControlName="expirationMonth" class="input form-control" type="text"
+                            id="expirationMonth" placeholder={{inputMonth}}>
+                    </div>
+                    <div *ngIf="validation.expirationMonth.touched && validation.expirationMonth.invalid"
+                        class="help is-danger">
+                        <div *ngIf="validation.expirationMonth.errors.required">Le mois d'expiration de la carte est
+                            requis
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field form-group">
+                    <label class="label has-text-left" for="csv"><strong class="has-text-danger">*</strong>
+                        {{cvc}}</label>
+                    <div class="control">
+                        <input formControlName="cvc" class="input form-control" type="text" id="cvc"
+                            placeholder={{inputCvc}}>
+                    </div>
+                    <div *ngIf="validation.cvc.touched && validation.cvc.invalid" class="help is-danger">
+                        <div *ngIf="validation.cvc.errors.required">Le code de verification de la carte est requis</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{informationSurLeDon}}</strong></p>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left">{{reason}}</label>
+            <div class="control">
+                <div class="select">
+                    <select formControlName="kind" class=" form-control" id="kind">
+                        <option>Faite votre choix</option>
+                        <option *ngFor="let reason of reasonList; index as i">{{reason}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label has-text-left form-control">{{comment}}</label>
+            <div class="control">
+                <textarea formControlName="comment" id="comment" class="textarea"
+                    placeholder={{inputMessage}}></textarea>
+            </div>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{confidentialite}}</strong></p>
+        </div>
+
+        <div class="field">
+            <p class="has-text-justified">En témoignage de reconnaissance, SALEM publie des listes de donateurs;</p>
+            <p class="has-text-justified"> si vous ne souhaitez pas que votre nom y paraisse, cochez ici.</p>
+            <div class="control">
+                <label class="checkbox">
+                    <input formControlName="isConfidential" id="isConfidential" type="checkbox">
+                    Confidentialité demandée
+                </label>
+            </div>
+        </div>
+
+        <div class="field">
+            <p class=""><strong class="has-text-primary">{{property}}</strong></p>
+        </div>
+
+        <div class="field">
+            <p class="has-text-justified">Les contributions faites par la partie donatrice en vertu du présent
+                engagement,
+            </p>
+            <p class="has-text-justified">constituent des dons. Elles deviennent ainsi la propriété de SALEM, dès leur
+            </p>
+            <p class="has-text-justified">encaissement celles-ci ne peuvent être remboursées ou retournées.
+            </p>
+
+        </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-info" type="submit" (click)="submit()"
+                    [disabled]="!form.valid">Soumettre</button>
+            </div>
+            <div class="control">
+                <button class="button is-info is-outlined" (click)="gotToDon()">Précedent</button>
+            </div>
+        </div>
+        <div *ngIf="hasError" class="tile is-parent">
+            <article class="message is-danger is-small">
+                <div class="message-body">
+                    {{errorMessage}}
+                </div>
+            </article>
+        </div>
+
+    </form>
+
+</div>

@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 public class AccountSignInDto {
 
     @NotNull(message = "Email is required")
-    @Size(max = 30)
+    @Size(max = 100)
     @Email
     private String email;
 

@@ -23,10 +23,10 @@ public class DonFactory {
         String edon = donRequestDto.getEdon();
 
         if (edon.equals(eDonFinancial.toString())) {
-            return new Don(address, donRequestDto.getKing(), donRequestDto.getComment(),
+            return new Don(donRequestDto.getValue(), address, donRequestDto.getKind(), donRequestDto.getComment(),
                     donRequestDto.getIsConfidential(), eDonFinancial);
         } else if (edon.equals(eDonMaterial.toString())) {
-            return new Don(address, donRequestDto.getKing(), donRequestDto.getComment(),
+            return new Don(donRequestDto.getValue(), address, donRequestDto.getKind(), donRequestDto.getComment(),
                     donRequestDto.getIsConfidential(), eDonMaterial);
 
         } else {

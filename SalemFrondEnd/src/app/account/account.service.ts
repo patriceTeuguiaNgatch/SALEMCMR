@@ -3,19 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, } from 'rxjs';
 import { ResponseAccountDto } from '../dto/ResponseAccountDto';
 
-import * as CryptoJS from 'crypto-js';
-import { RequestInformationDto } from '../dto/requestInformationDto';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
   private baseUrl = 'http://localhost:8080/salemapi';
-  private keyPassword: string = "melas0291"
-
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +31,14 @@ export class AccountService {
     return this.http.post<ResponseAccountDto>(`${this.baseUrl}/account/subscriber/create`, accountDto);
   }
 
+  createDon(donRegistrationDto: any): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/don/material/create`, donRegistrationDto);
+  }
+
+  createDonFinancial(donFinancialRequestDto: any): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/don/financial/create`, donFinancialRequestDto);
+  }
+
   findAccountById(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
@@ -51,14 +52,5 @@ export class AccountService {
 
     return this.http.post<ResponseAccountDto>(`${this.baseUrl}/message/create`, requestInformationDto);
   }
-
-
-  // encryptPassword(password: string) {
-  //   return CryptoJS.AES.encrypt(password.trim(), this.keyPassword.trim()).toString();
-  // }
-
-  // dencryptPassword(password: string) {
-  //   return CryptoJS.AES.decrypt(password.trim(), this.keyPassword.trim()).toString(CryptoJS.enc.Utf8);
-  // }
 
 }

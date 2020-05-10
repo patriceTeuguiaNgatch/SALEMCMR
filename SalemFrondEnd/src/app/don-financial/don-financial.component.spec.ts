@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DonFinancierComponent } from './don-financier.component';
+import { DonFinancialComponent } from './don-financial.component';
 
 describe('DonFinancierComponent', () => {
-  let component: DonFinancierComponent;
-  let fixture: ComponentFixture<DonFinancierComponent>;
+  let component: DonFinancialComponent;
+  let fixture: ComponentFixture<DonFinancialComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DonFinancierComponent ]
+      declarations: [DonFinancialComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DonFinancierComponent);
+    fixture = TestBed.createComponent(DonFinancialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -83,7 +83,7 @@
 
         <div class="field">
             <label class="label has-text-left">{{country}} </label>
-            <div class="control">
+            <div class="control control has-icons-left">
                 <div class="select">
                     <select formControlName="country" class="form-control" id="country">
                         <option>Faite votre choix</option>
@@ -91,6 +91,10 @@
                         </option>
 
                     </select>
+                </div>
+
+                <div class="icon is-small is-left">
+                    <i class="fa fa-globe"></i>
                 </div>
             </div>
         </div>
@@ -119,9 +123,9 @@
         </div>
 
         <div class="field">
-            <label class="label has-text-left form-control">{{comments}}</label>
+            <label class="label has-text-left form-control">{{comment}}</label>
             <div class="control">
-                <textarea formControlName="comments" id="comments" class="textarea"
+                <textarea formControlName="comment" id="comment" class="textarea"
                     placeholder={{inputMessage}}></textarea>
             </div>
         </div>
@@ -135,7 +139,7 @@
             <p class="has-text-justified"> si vous ne souhaitez pas que votre nom y paraisse, cochez ici.</p>
             <div class="control">
                 <label class="checkbox">
-                    <input formControlName="isConfidentiale" id="isConfidentiale" type="checkbox">
+                    <input formControlName="isConfidential" id="isConfidential" type="checkbox">
                     Confidentialité demandée
                 </label>
             </div>
@@ -163,6 +167,13 @@
             <div class="control">
                 <button class="button is-info is-outlined" (click)="gotToDon()">Précedent</button>
             </div>
+        </div>
+        <div *ngIf="hasError" class="tile is-parent">
+            <article class="message is-danger is-small">
+                <div class="message-body">
+                    {{errorMessage}}
+                </div>
+            </article>
         </div>
 
     </form>

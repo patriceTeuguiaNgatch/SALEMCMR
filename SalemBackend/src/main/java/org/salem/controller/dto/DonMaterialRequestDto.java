@@ -1,36 +1,58 @@
 package org.salem.controller.dto;
 
-public class DonRequestDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.salem.controller.exception.DonPreference;
+
+public class DonMaterialRequestDto {
+
+    @NotNull(message = "First name is required")
+    @Size(min = 1, max = 30)
     private String firstName;
 
+    @NotNull(message = "Last name is required")
+    @Size(min = 1, max = 30)
     private String lastName;
 
+    @NotNull(message = "Email is required")
+    @Size(max = 100)
+    @Email
     private String email;
 
     private String value;
 
+    @Size(max = 255)
     private String roadNumber;
 
+    @Size(max = 30)
     private String town;
 
+    @Size(max = 10)
     private String zipCode;
 
+    @Size(max = 20)
     private String phoneNumber;
 
+    @Size(max = 200)
     private String kind;
 
+    @Size(max = 100)
     private String comment;
 
     private boolean isConfidential;
 
+    @NotNull(message = "Don type is required")
+    @DonPreference
     private String edon;
 
-    public DonRequestDto() {
+    public DonMaterialRequestDto() {
     }
 
-    public DonRequestDto(String value, String firstName, String lastName, String email, String roadNumber, String town,
-            String zipCode, String phoneNumber, String kind, String comment, boolean isConfidential, String edon) {
+    public DonMaterialRequestDto(String value, String firstName, String lastName, String email, String roadNumber,
+            String town, String zipCode, String phoneNumber, String kind, String comment, boolean isConfidential,
+            String edon) {
         this.value = value;
         this.firstName = firstName;
         this.lastName = lastName;

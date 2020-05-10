@@ -11,14 +11,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DonRepository extends JpaRepository<Don, Long> {
 
-    @Query("SELECT new org.salem.domain.dto.DonPersistDto(d.donId, d.address.roadNumber, d.address.town, d.address.zipCode,"
-            + "d.kind, d.address.phoneNumber, d.comment, d.isConfidential, d.eDon, a.accountId, a.email, a.name.firstName, a.name.lastName)"
-            + " FROM Don d INNER JOIN d.account a")
-    List<DonPersistDto> findAllDon();
+        @Query("SELECT new org.salem.domain.dto.DonPersistDto(d.donId, d.value, d.address.roadNumber, d.address.town, d.address.zipCode,"
+                        + "d.kind, d.address.phoneNumber, d.comment, d.isConfidential, d.eDon, a.accountId, a.email, a.name.firstName, a.name.lastName)"
+                        + " FROM Don d INNER JOIN d.account a")
+        List<DonPersistDto> findAllDon();
 
-    @Query("SELECT new org.salem.domain.dto.DonPersistDto(d.donId, d.address.roadNumber, d.address.town, d.address.zipCode,"
-            + "d.kind, d.address.phoneNumber, d.comment, d.isConfidential, d.eDon, a.accountId, a.email, a.name.firstName, a.name.lastName)"
-            + " FROM Don d INNER JOIN d.account a where a.email = :email")
-    List<DonPersistDto> findDonByEmail(@Param("email") String email);
+        @Query("SELECT new org.salem.domain.dto.DonPersistDto(d.donId, d.value, d.address.roadNumber, d.address.town, d.address.zipCode,"
+                        + "d.kind, d.address.phoneNumber, d.comment, d.isConfidential, d.eDon, a.accountId, a.email, a.name.firstName, a.name.lastName)"
+                        + " FROM Don d INNER JOIN d.account a where a.email = :email")
+        List<DonPersistDto> findDonByEmail(@Param("email") String email);
 
 }

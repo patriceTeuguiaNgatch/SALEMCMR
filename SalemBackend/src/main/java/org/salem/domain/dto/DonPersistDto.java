@@ -8,6 +8,8 @@ public class DonPersistDto {
 
     private Long donId;
 
+    private String value;
+
     private String roadNumber;
 
     private String town;
@@ -35,10 +37,11 @@ public class DonPersistDto {
     public DonPersistDto() {
     }
 
-    public DonPersistDto(Long donId, String roadNumber, String town, String zipCode, String kind, String phoneNumber,
-            String comment, boolean isConfidential, Edon eDon, Long accountId, String email, String firstName,
-            String lastName) {
+    public DonPersistDto(Long donId, String value, String roadNumber, String town, String zipCode, String kind,
+            String phoneNumber, String comment, boolean isConfidential, Edon eDon, Long accountId, String email,
+            String firstName, String lastName) {
         this.donId = donId;
+        this.value = value;
         this.roadNumber = roadNumber;
         this.town = town;
         this.zipCode = zipCode;
@@ -159,6 +162,14 @@ public class DonPersistDto {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override

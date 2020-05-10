@@ -15,7 +15,7 @@ public class MessageRequestDto {
     private String lastName;
 
     @NotNull(message = "Email is required")
-    @Size(max = 30)
+    @Size(max = 100)
     @Email
     private String email;
 

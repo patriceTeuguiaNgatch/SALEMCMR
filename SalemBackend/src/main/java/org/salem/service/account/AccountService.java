@@ -5,30 +5,22 @@ import java.util.logging.Logger;
 
 import org.salem.controller.dto.AccountRequestDto;
 import org.salem.controller.dto.AccountSignInDto;
-import org.salem.controller.dto.DonRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
-import org.salem.domain.account.ERole;
-import org.salem.domain.don.Don;
 import org.salem.domain.don.Name;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
-import org.salem.domain.exception.InvalidDonTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.assemler.AccountAssembler;
 import org.salem.service.assemler.NameAssembler;
-import org.salem.service.don.DonService;
 import org.salem.service.dto.AccountDto;
-import org.salem.service.dto.DonDto;
 import org.salem.service.dto.NameDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
-
-    @Autowired
-    private final DonService donService;
 
     @Autowired
     private final AccountFactory accountFactory;
@@ -42,15 +34,16 @@ public class AccountService {
     @Autowired
     private final AccountRepository accountRepository;
 
-    private final static String secret = "melas@2010";
+    @Value("${secret.crypto.aes}")
+    private String secretCryptography;
 
     public AccountService(final AccountFactory accountFactory, final AccountAssembler accountAssembler,
-            final NameAssembler nameAssembler, final AccountRepository accountRepository, final DonService donService) {
+            final NameAssembler nameAssembler, final AccountRepository accountRepository) {
         this.accountFactory = accountFactory;
         this.accountAssembler = accountAssembler;
         this.nameAssembler = nameAssembler;
         this.accountRepository = accountRepository;
-        this.donService = donService;
+        // this.donService = donService;
     }
 
     private static final Logger LOGGER = Logger.getLogger(AccountService.class.getName());
@@ -77,7 +70,7 @@ public class AccountService {
         }
 
         final Account account = this.accountFactory.create(accountRequestDto);
-        account.encryptPassword(secret);
+        account.encryptPassword(secretCryptography);
         final Account accountSave = this.accountRepository.save(account);
         final AccountDto accountDto = this.accountAssembler.create(accountSave);
 
@@ -151,7 +144,8 @@ public class AccountService {
         LOGGER.info("Sign in account by email : " + email + " : " + LOGGER.getName());
 
         final Account accountFind = accountRepository.findByEmail(email);
-        if (accountFind != null && accountFind.hasEmail(email) && accountFind.hasPassword(password, secret)) {
+        if (accountFind != null && accountFind.hasEmail(email)
+                && accountFind.hasPassword(password, secretCryptography)) {
             return this.accountAssembler.create(accountFind);
 
         } else {
@@ -160,49 +154,4 @@ public class AccountService {
         }
     }
 
-    public DonDto createDon(final DonRequestDto donRequestDto)
-            throws InvalidAccountTypeException, InvalidDonTypeException {
-
-        final String email = donRequestDto.getEmail();
-
-        LOGGER.info("Create don : " + email + " : " + LOGGER.getName());
-        DonDto donDto = new DonDto();
-
-        final Account accountFind = this.accountRepository.findByEmail(email);
-        if (accountFind != null && accountFind.hasEmail(email)) {
-            final Don don = this.donService.Create(donRequestDto);
-            don.setAccount(accountFind);
-            final Don donSave = donService.save(don);
-            this.accountRepository.save(accountFind);
-            donDto = this.donService.Create(donSave);
-        } else {
-            donDto = this.createDonAccountNotExist(donRequestDto);
-        }
-
-        return donDto;
-    }
-
-    private DonDto createDonAccountNotExist(final DonRequestDto donRequestDto)
-            throws InvalidDonTypeException, InvalidAccountTypeException {
-
-        final Don don = this.donService.Create(donRequestDto);
-
-        final String firstName = donRequestDto.getFirstName();
-        final String lastName = donRequestDto.getLastName();
-        final String password = "password";
-        final String phoneNumber = donRequestDto.getPhoneNumber();
-        final String roleSubscriber = ERole.ROLE_SUBSCRIBER.toString();
-        final String email = donRequestDto.getEmail();
-
-        final AccountRequestDto accountRequestDto = new AccountRequestDto(firstName, lastName, password, email,
-                phoneNumber, roleSubscriber);
-        final Account accountCreate = this.accountFactory.create(accountRequestDto);
-        don.setAccount(accountCreate);
-
-        this.accountRepository.save(accountCreate);
-        final Don donSave = this.donService.save(don);
-
-        return this.donService.Create(donSave);
-
-    }
 }

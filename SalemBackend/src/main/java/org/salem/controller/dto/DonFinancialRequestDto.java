@@ -1,43 +1,64 @@
 package org.salem.controller.dto;
 
-public class DonRequestDto {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.salem.controller.exception.DonPreference;
+
+public class DonFinancialRequestDto {
+
+    @NotNull(message = "First name is required")
+    @Size(min = 1, max = 30)
     private String firstName;
 
+    @NotNull(message = "Last name is required")
+    @Size(min = 1, max = 30)
     private String lastName;
 
+    @NotNull(message = "Email is required")
+    @Size(max = 100)
+    @Email
     private String email;
 
+    @NotNull(message = "Stripe payment token is required")
+    @Size(min = 1)
+    private String token;
+
+    @NotNull(message = "value is required")
+    @Size(min = 1, max = 100)
     private String value;
 
-    private String roadNumber;
+    @NotNull(message = "Currency is required")
+    @Size(min = 1, max = 5)
+    private String currency;
 
-    private String town;
-
-    private String zipCode;
-
+    @Size(max = 20)
     private String phoneNumber;
 
+    @Size(max = 200)
     private String kind;
 
+    @Size(max = 100)
     private String comment;
 
     private boolean isConfidential;
 
+    @NotNull(message = "Don type is required")
+    @DonPreference
     private String edon;
 
-    public DonRequestDto() {
+    public DonFinancialRequestDto() {
     }
 
-    public DonRequestDto(String value, String firstName, String lastName, String email, String roadNumber, String town,
-            String zipCode, String phoneNumber, String kind, String comment, boolean isConfidential, String edon) {
-        this.value = value;
+    public DonFinancialRequestDto(String firstName, String lastName, String email, String value, String currency,
+            String token, String phoneNumber, String kind, String comment, boolean isConfidential, String edon) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.roadNumber = roadNumber;
-        this.town = town;
-        this.zipCode = zipCode;
+        this.value = value;
+        this.currency = currency;
+        this.token = token;
         this.phoneNumber = phoneNumber;
         this.kind = kind;
         this.comment = comment;
@@ -69,28 +90,12 @@ public class DonRequestDto {
         this.email = email;
     }
 
-    public String getRoadNumber() {
-        return this.roadNumber;
+    public String getToken() {
+        return this.token;
     }
 
-    public void setRoadNumber(String roadNumber) {
-        this.roadNumber = roadNumber;
-    }
-
-    public String getTown() {
-        return this.town;
-    }
-
-    public void setTown(String town) {
-        this.town = town;
-    }
-
-    public String getZipCode() {
-        return this.zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getPhoneNumber() {
@@ -105,8 +110,8 @@ public class DonRequestDto {
         return this.kind;
     }
 
-    public void setKind(String king) {
-        this.kind = king;
+    public void setKind(String kind) {
+        this.kind = kind;
     }
 
     public String getComment() {
@@ -143,6 +148,14 @@ public class DonRequestDto {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getCurrency() {
+        return this.currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
 }

@@ -13,8 +13,8 @@ import { HeaderComponent } from './componentReusable/header/header.component';
 import { DonComponent } from './don/don.component';
 import { HomeComponent } from './home/home.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
-import { DonMaterielComponent } from './don-materiel/don-materiel.component';
-import { DonFinancierComponent } from './don-financier/don-financier.component';
+import { DonMaterialComponent } from './don-material/don-material.component';
+import { DonFinancialComponent } from './don-financial/don-financial.component';
 import { RemerciementComponent } from './remerciement/remerciement.component';
 import { ContactComponent } from './contact/contact.component';
 import { ModalitesUtilisationComponent } from './modalites-utilisation/modalites-utilisation.component';
@@ -38,8 +38,8 @@ import { RequestInformationComponent } from './componentReusable/request-informa
     DonComponent,
     HomeComponent,
     NoPageFoundComponent,
-    DonMaterielComponent,
-    DonFinancierComponent,
+    DonMaterialComponent,
+    DonFinancialComponent,
     RemerciementComponent,
     ContactComponent,
     ModalitesUtilisationComponent,
@@ -62,7 +62,7 @@ import { RequestInformationComponent } from './componentReusable/request-informa
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorIntercept,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

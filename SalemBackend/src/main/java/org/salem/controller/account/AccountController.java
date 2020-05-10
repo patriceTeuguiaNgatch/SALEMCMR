@@ -10,17 +10,17 @@ import javax.validation.constraints.Size;
 
 import org.salem.controller.dto.AccountRequestDto;
 import org.salem.controller.dto.AccountSignInDto;
-import org.salem.controller.dto.DonRequestDto;
 import org.salem.controller.dto.ResponseDto;
 import org.salem.controller.exception.ErrorDetail;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
-import org.salem.domain.exception.InvalidDonTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
 import org.salem.service.account.AccountService;
 import org.salem.service.dto.AccountDto;
-import org.salem.service.dto.DonDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,9 +31,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 
 @RestController
 @RequestMapping(path = "/account")
@@ -149,21 +146,6 @@ public class AccountController {
 
         final AccountDto accountDto = accountService.deleteAccount(accountId);
         final ResponseDto responseDto = new ResponseDto(HttpStatus.OK.toString(), accountDto, new ErrorDetail());
-
-        return ResponseEntity.accepted().body(responseDto);
-    }
-
-    @PostMapping(path = "/don", produces = "application/json", consumes = "application/json")
-    @ResponseBody
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ResponseDto> createDon(@RequestBody final @Valid DonRequestDto donRequestDto)
-            throws InvalidDonTypeException, InvalidAccountTypeException {
-
-        LOGGER.info("Create the don : " + donRequestDto.getFirstName() + " : " + LOGGER.getName());
-
-        final DonDto donDto = this.accountService.createDon(donRequestDto);
-
-        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
 
         return ResponseEntity.accepted().body(responseDto);
     }

@@ -4,6 +4,8 @@ public class DonDto {
 
     private String donId;
 
+    private String value;
+
     private AddressDto addressDto;
 
     private String kind;
@@ -19,9 +21,10 @@ public class DonDto {
     public DonDto() {
     }
 
-    public DonDto(String donId, String email, AddressDto addressDto, String kind, String comment,
+    public DonDto(String donId, String value, String email, AddressDto addressDto, String kind, String comment,
             boolean isConfidential, DonAccountDto donAccountDto) {
         this.donId = donId;
+        this.value = value;
         this.addressDto = addressDto;
         this.kind = kind;
         this.comment = comment;
@@ -87,6 +90,14 @@ public class DonDto {
 
     public void setDonAccountDto(DonAccountDto donAccountDto) {
         this.donAccountDto = donAccountDto;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

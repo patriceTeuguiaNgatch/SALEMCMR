@@ -3,6 +3,9 @@ package org.salem.service.assemler;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.salem.controller.dto.DonFinancialRequestDto;
+import org.salem.controller.dto.DonMaterialRequestDto;
+import org.salem.controller.dto.DonRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.don.Address;
 import org.salem.domain.don.Don;
@@ -35,6 +38,7 @@ public class DonAssembler {
         final DonDto donDto = new DonDto();
         final Long dondId = don.getDonId();
         donDto.setDonId(dondId.toString());
+        donDto.setValue(don.getValue());
 
         final Address address = don.getAddress();
         final AddressDto addressDto = this.addressAssembler.create(address);
@@ -56,6 +60,8 @@ public class DonAssembler {
 
         final Don don = new Don();
         don.setDonId(donPersist.getDonId());
+
+        don.setValue(donPersist.getValue());
 
         final Address address = new Address();
         address.setRoadNumber(donPersist.getRoadNumber());
@@ -116,6 +122,41 @@ public class DonAssembler {
         }
 
         return donDtos;
+    }
+
+    public DonRequestDto create(DonMaterialRequestDto donMaterialRequestDto) {
+        final DonRequestDto donRequestDto = new DonRequestDto();
+
+        donRequestDto.setFirstName(donMaterialRequestDto.getFirstName());
+        donRequestDto.setLastName(donMaterialRequestDto.getLastName());
+        donRequestDto.setEmail(donMaterialRequestDto.getEmail());
+        donRequestDto.setValue(donMaterialRequestDto.getValue());
+        donRequestDto.setRoadNumber(donMaterialRequestDto.getRoadNumber());
+        donRequestDto.setTown(donMaterialRequestDto.getTown());
+        donRequestDto.setZipCode(donMaterialRequestDto.getZipCode());
+        donRequestDto.setPhoneNumber(donMaterialRequestDto.getPhoneNumber());
+        donRequestDto.setKind(donMaterialRequestDto.getKind());
+        donRequestDto.setComment(donMaterialRequestDto.getComment());
+        donRequestDto.setIsConfidential(donMaterialRequestDto.getIsConfidential());
+        donRequestDto.setEdon(donMaterialRequestDto.getEdon());
+
+        return donRequestDto;
+    }
+
+    public DonRequestDto create(DonFinancialRequestDto donFinancialRequestDto) {
+        final DonRequestDto donRequestDto = new DonRequestDto();
+
+        donRequestDto.setFirstName(donFinancialRequestDto.getFirstName());
+        donRequestDto.setLastName(donFinancialRequestDto.getLastName());
+        donRequestDto.setEmail(donFinancialRequestDto.getEmail());
+        donRequestDto.setValue(donFinancialRequestDto.getValue());
+        donRequestDto.setPhoneNumber(donFinancialRequestDto.getPhoneNumber());
+        donRequestDto.setKind(donFinancialRequestDto.getKind());
+        donRequestDto.setComment(donFinancialRequestDto.getComment());
+        donRequestDto.setIsConfidential(donFinancialRequestDto.getIsConfidential());
+        donRequestDto.setEdon(donFinancialRequestDto.getEdon());
+
+        return donRequestDto;
     }
 
 }

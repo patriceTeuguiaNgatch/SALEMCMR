@@ -38,6 +38,9 @@ public class Don implements Serializable {
     @Column(name = "king")
     private String kind;
 
+    @Column(name = "value")
+    private String value;
+
     @Column(name = "comment")
     private String comment;
 
@@ -56,8 +59,9 @@ public class Don implements Serializable {
     public Don() {
     }
 
-    public Don(final Address address, final String kind, final String comment, final boolean isConfidential,
-            final Edon eDon) {
+    public Don(final String value, final Address address, final String kind, final String comment,
+            final boolean isConfidential, final Edon eDon) {
+        this.value = value;
         this.address = address;
         this.kind = kind;
         this.comment = comment;
@@ -128,6 +132,14 @@ public class Don implements Serializable {
 
     public Boolean isConfidential() {
         return this.isConfidential;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
