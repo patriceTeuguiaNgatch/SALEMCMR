@@ -50,6 +50,12 @@ public class DonService {
     @Value("${stripe.keys.secret}")
     private String API_SECRET_KEY;
 
+    private final static String AMOUNT = "amount";
+    private final static String CURRENCY = "currency";
+    private final static String DESCRIPTION = "description";
+    private final static String SOURCE = "source";
+    private final static String PASSWORD = "password";
+
     private static final Logger LOGGER = Logger.getLogger(DonService.class.getName());
 
     public DonService(final DonFactory donFactory, final DonAssembler donAssembler, final DonRepository donRepository,
@@ -141,10 +147,10 @@ public class DonService {
             Stripe.apiKey = API_SECRET_KEY;
             Map<String, Object> chargeParams = new HashMap<>();
             int valueCent = this.convertToCent(value);
-            chargeParams.put("amount", valueCent);
-            chargeParams.put("currency", currency);
-            chargeParams.put("description", "Charge for " + email);
-            chargeParams.put("source", token);
+            chargeParams.put(AMOUNT, valueCent);
+            chargeParams.put(CURRENCY, currency);
+            chargeParams.put(DESCRIPTION, "Charge for " + email);
+            chargeParams.put(SOURCE, token);
             Charge charge = Charge.create(chargeParams);
             validateCharge(charge);
             return this.saveDonFinancial(donFinancialRequestDto);
@@ -172,7 +178,7 @@ public class DonService {
 
         final String firstName = donRequestDto.getFirstName();
         final String lastName = donRequestDto.getLastName();
-        final String password = "password";
+        final String password = PASSWORD;
         final String phoneNumber = donRequestDto.getPhoneNumber();
         final String roleSubscriber = ERole.ROLE_SUBSCRIBER.toString();
         final String email = donRequestDto.getEmail();

@@ -120,18 +120,21 @@ export class DonFinancialComponent implements OnInit {
         exp_year: this.form.value.expirationYear,
         cvc: this.form.value.cvc,
       }, (status: number, response: any) => {
-        if (status === 200) {
-          this.donFinancialRegistrationDto.setToken(response.id);
+        this.ngZone.run(() => {
+          if (status === 200) {
+            this.donFinancialRegistrationDto.setToken(response.id);
 
-          console.log(this.donFinancialRegistrationDto);
+            console.log(this.donFinancialRegistrationDto);
 
-          this.save();
+            this.save();
 
-        } else {
-          console.log(response.error.message);
-          this.updateErrorParamater();
-        }
+          } else {
+            console.log(response.error.message);
+            this.updateErrorParamater();
+          }
+        })
       });
+
     }
   }
 
