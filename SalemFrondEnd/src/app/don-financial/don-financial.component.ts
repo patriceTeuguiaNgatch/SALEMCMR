@@ -124,6 +124,9 @@ export class DonFinancialComponent implements OnInit {
           if (status === 200) {
             this.donFinancialRegistrationDto.setToken(response.id);
 
+            console.log("card : ", response.card);
+
+
             console.log(this.donFinancialRegistrationDto);
 
             this.save();
