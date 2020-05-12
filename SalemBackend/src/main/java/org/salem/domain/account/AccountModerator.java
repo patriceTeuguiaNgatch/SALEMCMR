@@ -1,20 +1,23 @@
-// package org.salem.domain.account;
+package org.salem.domain.account;
 
-// import java.util.Set;
+import java.util.Set;
 
-// import javax.persistence.DiscriminatorValue;
-// import javax.persistence.Entity;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-// import org.salem.domain.don.Name;
+import org.salem.domain.don.Name;
 
-// @Entity
-// @DiscriminatorValue("moderator")
-// public class AccountModerator extends Account {
+@Entity
+@DiscriminatorValue("moderator")
+public class AccountModerator extends Account {
 
-// private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-// public AccountModerator(Name name, String password, String email, String
-// phoneNumber, Set<Role> roles) {
-// super(name, password, email, phoneNumber, roles);
-// }
-// }
+    public AccountModerator() {
+        super();
+    }
+
+    public AccountModerator(Name name, String password, String email, String phoneNumber, Set<Role> roles) {
+        super(name, password, email, phoneNumber, roles);
+    }
+}

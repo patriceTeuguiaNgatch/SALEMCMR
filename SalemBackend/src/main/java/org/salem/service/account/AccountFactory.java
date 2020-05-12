@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.salem.controller.dto.AccountRequestDto;
 import org.salem.domain.account.Account;
+import org.salem.domain.account.AccountAdministrator;
+import org.salem.domain.account.AccountModerator;
+import org.salem.domain.account.AccountSubscriber;
 import org.salem.domain.account.ERole;
 import org.salem.domain.account.Role;
 import org.salem.domain.don.Name;
@@ -39,17 +42,17 @@ public class AccountFactory {
 
         if (role.equals(eRoleSubscriber.toString())) {
             setRoles.add(roleVolunteer);
-            return new Account(name, password, email, phoneNumber, setRoles);
+            return new AccountSubscriber(name, password, email, phoneNumber, setRoles);
         } else if (role.equals(eRoleModerator.toString())) {
             setRoles.add(roleVolunteer);
             setRoles.add(roleModerator);
-            return new Account(name, password, email, phoneNumber, setRoles);
+            return new AccountModerator(name, password, email, phoneNumber, setRoles);
         } else if (role.equals(eRoleAdmistrator.toString())) {
             Role roleAdmistrator = new Role(eRoleAdmistrator);
             setRoles.add(roleVolunteer);
             setRoles.add(roleModerator);
             setRoles.add(roleAdmistrator);
-            return new Account(name, password, email, phoneNumber, setRoles);
+            return new AccountAdministrator(name, password, email, phoneNumber, setRoles);
         } else {
             throw new InvalidAccountTypeException(role);
         }

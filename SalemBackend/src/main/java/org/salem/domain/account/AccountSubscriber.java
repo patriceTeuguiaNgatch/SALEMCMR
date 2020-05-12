@@ -1,22 +1,25 @@
-// package org.salem.domain.account;
+package org.salem.domain.account;
 
-// import java.util.Set;
+import java.util.Set;
 
-// import javax.persistence.DiscriminatorValue;
-// import javax.persistence.Entity;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-// import org.salem.domain.don.Name;
+import org.salem.domain.don.Name;
 
-// @Entity
-// @DiscriminatorValue("subscriber")
-// public class AccountSubscriber extends Account {
+@Entity
+@DiscriminatorValue("subscriber")
+public class AccountSubscriber extends Account {
 
-// private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-// public AccountSubscriber(final Name name, final String password, final String
-// email, final String phoneNumber,
-// final Set<Role> roles) {
-// super(name, password, email, phoneNumber, roles);
-// }
+    public AccountSubscriber() {
+        super();
+    }
 
-// }
+    public AccountSubscriber(final Name name, final String password, final String email, final String phoneNumber,
+            final Set<Role> roles) {
+        super(name, password, email, phoneNumber, roles);
+    }
+
+}
