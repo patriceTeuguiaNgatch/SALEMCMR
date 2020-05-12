@@ -43,7 +43,6 @@ public class AccountService {
         this.accountAssembler = accountAssembler;
         this.nameAssembler = nameAssembler;
         this.accountRepository = accountRepository;
-        // this.donService = donService;
     }
 
     private static final Logger LOGGER = Logger.getLogger(AccountService.class.getName());
