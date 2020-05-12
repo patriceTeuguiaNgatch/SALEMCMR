@@ -2,12 +2,20 @@
 
 // import java.util.Set;
 
+// import javax.persistence.DiscriminatorValue;
+// import javax.persistence.Entity;
+
+// import org.salem.domain.don.Name;
+
+// @Entity
+// @DiscriminatorValue("administrator")
 // public class AccountAdministrator extends Account {
 
-// public AccountAdministrator(String firstName, String lastName, String
-// password, String email,
-// String telephoneNumber, Set<Role> roles) {
-// super(firstName, lastName, password, email, telephoneNumber, roles);
+// private static final long serialVersionUID = 1L;
+
+// public AccountAdministrator(Name name, String password, String email, String
+// phoneNumber, Set<Role> roles) {
+// super(name, password, email, phoneNumber, roles);
 // }
 
 // }
