@@ -1,30 +1,40 @@
 package org.salem.domain.account;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.salem.domain.don.Don;
 import org.salem.domain.don.Name;
 
 @Entity
 @Table(name = "accounts")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +43,11 @@ public class Account implements Serializable {
     @Column(name = "accountId")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(name = "creationDate")
+    private Date creationDate;
 
     @Embedded
     private Name name;
@@ -86,6 +101,10 @@ public class Account implements Serializable {
 
     public Name getName() {
         return this.name;
+    }
+
+    public Date getCreationDate() {
+        return this.creationDate;
     }
 
     public void setName(Name name) {
