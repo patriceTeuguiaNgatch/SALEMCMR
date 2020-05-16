@@ -1,21 +1,27 @@
 package org.salem.service.assemler;
 
+import org.salem.domain.account.Name;
 import org.salem.domain.message.Message;
 import org.salem.service.dto.MessageDto;
+import org.salem.service.dto.NameDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageAssembler {
 
-    public MessageAssembler() {
+    @Autowired
+    private final NameAssembler nameAssembler;
 
+    public MessageAssembler(NameAssembler nameAssembler) {
+        this.nameAssembler = nameAssembler;
     }
 
     public MessageDto create(final Message message) {
-        MessageDto messageDto = new MessageDto();
+        final MessageDto messageDto = new MessageDto();
         messageDto.setMessageId(message.getMessageId().toString());
-        messageDto.setFirstName(message.getFirstName());
-        messageDto.setLastName(message.getLastName());
+        final NameDto nameDto = this.nameAssembler.create(message.getName());
+        messageDto.setNameDto(nameDto);
         messageDto.setEmail(message.getEmail());
         messageDto.setPhoneNumber(message.getPhoneNumber());
         messageDto.setComment(message.getComment());
@@ -24,9 +30,9 @@ public class MessageAssembler {
     }
 
     public Message create(final MessageDto messageDto) {
-        Message message = new Message();
-        message.setFirstName(messageDto.getFirstName());
-        message.setLastName(messageDto.getLastName());
+        final Message message = new Message();
+        final Name name = this.nameAssembler.create(messageDto.getNameDto());
+        message.setName(name);
         message.setEmail(messageDto.getEmail());
         message.setPhoneNumber(messageDto.getPhoneNumber());
         message.setComment(messageDto.getComment());

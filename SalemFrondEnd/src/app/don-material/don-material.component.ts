@@ -128,6 +128,20 @@ export class DonMaterialComponent implements OnInit {
         console.log(error);
         this.updateErrorParamater();
       });
+
+    this.accountService.createDonMaterialThankYou(this.donMaterialRegistrationDto).subscribe(response => {
+      this.httpStatus = response.httpStatus;
+      if (this.isCreated()) {
+        console.log(response);
+      } else {
+        console.log(response);
+      }
+    },
+      error => {
+
+        console.log(error);
+      });
+
     this.donMaterialRegistrationDto = new DonMaterialRegistrationDto();
 
   }

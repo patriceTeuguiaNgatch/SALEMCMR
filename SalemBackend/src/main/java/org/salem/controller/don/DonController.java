@@ -77,12 +77,29 @@ public class DonController {
     @PostMapping(path = "material/create", produces = "application/json", consumes = "application/json")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ResponseDto> createDon(@RequestBody final @Valid DonMaterialRequestDto donMaterialRequestDto)
+    public ResponseEntity<ResponseDto> createDonMaterial(
+            @RequestBody final @Valid DonMaterialRequestDto donMaterialRequestDto)
             throws InvalidDonTypeException, InvalidAccountTypeException {
 
         LOGGER.info("Create  don material : " + donMaterialRequestDto.getFirstName() + " : " + LOGGER.getName());
 
         final DonDto donDto = this.donService.createDonMaterial(donMaterialRequestDto);
+
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
+    @PostMapping(path = "material/create/information", produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ResponseDto> createDonMaterialThankYou(
+            @RequestBody final @Valid DonMaterialRequestDto donMaterialRequestDto) throws Exception {
+
+        LOGGER.info(
+                "Create  don material thank you: " + donMaterialRequestDto.getFirstName() + " : " + LOGGER.getName());
+
+        final DonDto donDto = this.donService.createDonMaterialThankYou(donMaterialRequestDto);
 
         final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
 
@@ -99,6 +116,22 @@ public class DonController {
         LOGGER.info("Create  don financial : " + email + " : " + LOGGER.getName());
 
         final DonDto donDto = donService.createDonFinancial(donFinancialRequestDto);
+
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
+    @PostMapping(path = "financial/create/information", produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ResponseDto> createDonFinancialThankYou(
+            @RequestBody final @Valid DonFinancialRequestDto donFinancialRequestDto) throws Exception {
+        final String email = donFinancialRequestDto.getEmail();
+
+        LOGGER.info("Create  don financial thank you : " + email + " : " + LOGGER.getName());
+
+        final DonDto donDto = donService.createDonFinancialThankYou(donFinancialRequestDto);
 
         final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), donDto, new ErrorDetail());
 

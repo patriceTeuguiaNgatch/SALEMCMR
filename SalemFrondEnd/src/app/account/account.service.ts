@@ -53,4 +53,16 @@ export class AccountService {
     return this.http.post<ResponseAccountDto>(`${this.baseUrl}/message/create`, requestInformationDto);
   }
 
+  sendMessageInformation(requestInformationDto: any): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/message/create/confirmation`, requestInformationDto);
+  }
+
+  createDonMaterialThankYou(donMaterialRegistrationDto: any): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/don/material/create/information`, donMaterialRegistrationDto);
+  }
+
+  createDonFinancialThankYou(donFinancialRegistrationDto: any): Observable<ResponseAccountDto> {
+    return this.http.post<ResponseAccountDto>(`${this.baseUrl}/don/material/create/information`, donFinancialRegistrationDto);
+  }
+
 }

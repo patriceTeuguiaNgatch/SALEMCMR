@@ -1,5 +1,7 @@
 package org.salem.service.don;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,16 +17,23 @@ import org.salem.controller.dto.DonRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
 import org.salem.domain.account.ERole;
+import org.salem.domain.account.Name;
 import org.salem.domain.don.Don;
 import org.salem.domain.don.DonRepository;
 import org.salem.domain.dto.DonPersistDto;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.InvalidDonTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
+import org.salem.domain.message.EmailNotification;
+import org.salem.domain.message.Message;
+import org.salem.domain.message.MessageInformation;
+import org.salem.domain.message.Notification;
 import org.salem.service.account.AccountFactory;
 import org.salem.service.assemler.DonAssembler;
+import org.salem.service.assemler.NameAssembler;
 import org.salem.service.dto.DonDto;
 import org.salem.service.exception.StrikeException;
+import org.salem.service.message.NotificationSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,6 +48,9 @@ public class DonService {
     private final DonAssembler donAssembler;
 
     @Autowired
+    private final NameAssembler nameAssembler;
+
+    @Autowired
     private final DonRepository donRepository;
 
     @Autowired
@@ -47,8 +59,14 @@ public class DonService {
     @Autowired
     private final AccountRepository accountRepository;
 
+    @Autowired
+    private final NotificationSenderService notificationSenderService;
+
     @Value("${stripe.keys.secret}")
     private String API_SECRET_KEY;
+
+    @Value("${spring.mail.username}")
+    private String emailSalem;
 
     private final static String AMOUNT = "amount";
     private final static String CURRENCY = "currency";
@@ -58,31 +76,34 @@ public class DonService {
 
     private static final Logger LOGGER = Logger.getLogger(DonService.class.getName());
 
-    public DonService(final DonFactory donFactory, final DonAssembler donAssembler, final DonRepository donRepository,
-            final AccountRepository accountRepository, final AccountFactory accountFactory) {
+    public DonService(final DonFactory donFactory, final DonAssembler donAssembler, final NameAssembler nameAssembler,
+            final DonRepository donRepository, final AccountRepository accountRepository,
+            final AccountFactory accountFactory, final NotificationSenderService notificationSenderService) {
         this.donFactory = donFactory;
         this.donAssembler = donAssembler;
+        this.nameAssembler = nameAssembler;
         this.donRepository = donRepository;
         this.accountRepository = accountRepository;
         this.accountFactory = accountFactory;
+        this.notificationSenderService = notificationSenderService;
 
     }
 
     public List<DonDto> findAllDon() {
-        List<DonPersistDto> donPersists = this.donRepository.findAllDon();
-        List<Don> dons = this.donAssembler.createListDon(donPersists);
-        List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
+        final List<DonPersistDto> donPersists = this.donRepository.findAllDon();
+        final List<Don> dons = this.donAssembler.createListDon(donPersists);
+        final List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
 
         return donDtos;
     }
 
     public List<DonDto> findDonByEmail(final String email) throws ResourceNotFoundException {
-        List<DonPersistDto> donPersists = this.donRepository.findDonByEmail(email);
+        final List<DonPersistDto> donPersists = this.donRepository.findDonByEmail(email);
         if (donPersists.size() == 0) {
             throw new ResourceNotFoundException("Don not found for this email : " + email);
         }
-        List<Don> dons = this.donAssembler.createListDon(donPersists);
-        List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
+        final List<Don> dons = this.donAssembler.createListDon(donPersists);
+        final List<DonDto> donDtos = this.donAssembler.createListDonDto(dons);
 
         return donDtos;
     }
@@ -92,7 +113,7 @@ public class DonService {
 
         final String email = donMaterialRequestDto.getEmail();
 
-        DonRequestDto donRequestDto = this.donAssembler.create(donMaterialRequestDto);
+        final DonRequestDto donRequestDto = this.donAssembler.create(donMaterialRequestDto);
         LOGGER.info("Create don : " + email + " : " + LOGGER.getName());
         DonDto donDto = new DonDto();
 
@@ -115,7 +136,7 @@ public class DonService {
 
         final String email = donFinancialRequestDto.getEmail();
 
-        DonRequestDto donRequestDto = this.donAssembler.create(donFinancialRequestDto);
+        final DonRequestDto donRequestDto = this.donAssembler.create(donFinancialRequestDto);
 
         LOGGER.info("Create don : " + email + " : " + LOGGER.getName());
         DonDto donDto = new DonDto();
@@ -134,7 +155,7 @@ public class DonService {
         return donDto;
     }
 
-    public DonDto createDonFinancial(DonFinancialRequestDto donFinancialRequestDto) throws StrikeException {
+    public DonDto createDonFinancial(final DonFinancialRequestDto donFinancialRequestDto) throws StrikeException {
 
         final String email = donFinancialRequestDto.getEmail();
 
@@ -145,28 +166,78 @@ public class DonService {
         final String currency = donFinancialRequestDto.getCurrency();
         try {
             Stripe.apiKey = API_SECRET_KEY;
-            Map<String, Object> chargeParams = new HashMap<>();
-            int valueCent = this.convertToCent(value);
+            final Map<String, Object> chargeParams = new HashMap<>();
+            final int valueCent = this.convertToCent(value);
             chargeParams.put(AMOUNT, valueCent);
             chargeParams.put(CURRENCY, currency);
             chargeParams.put(DESCRIPTION, "Charge for " + email);
             chargeParams.put(SOURCE, token);
-            Charge charge = Charge.create(chargeParams);
+            final Charge charge = Charge.create(chargeParams);
             validateCharge(charge);
             return this.saveDonFinancial(donFinancialRequestDto);
-        } catch (Exception ex) {
-            String message = ex.getMessage();
+        } catch (final Exception ex) {
+            final String message = ex.getMessage();
             throw new StrikeException(message);
         }
     }
 
-    private int convertToCent(int amount) {
+    public DonDto createDonFinancialThankYou(final DonFinancialRequestDto donFinancialRequestDto) throws Exception {
+
+        final Name name = this.nameAssembler.createName(donFinancialRequestDto.getFirstName(),
+                donFinancialRequestDto.getLastName());
+        final Message message = new Message(name, donFinancialRequestDto.getEmail(),
+                donFinancialRequestDto.getPhoneNumber(), donFinancialRequestDto.getComment());
+
+        final EmailNotification emailNotification = new EmailNotification();
+        emailNotification.setEmailRecipient(donFinancialRequestDto.getEmail());
+        emailNotification.setCreationDate(LocalDateTime.now());
+        emailNotification.setCreationDate(LocalDateTime.now());
+
+        final String subject = MessageInformation.REMERCIMENT;
+        final String mesageSend = MessageInformation.formateDonThankYouMessage(message);
+        emailNotification.setSubject(subject);
+        emailNotification.setMessage(mesageSend);
+        emailNotification.setName(name);
+
+        final List<Notification> notifications = new ArrayList<>();
+        notifications.add(emailNotification);
+
+        this.notificationSenderService.send(notifications);
+        return new DonDto();
+    }
+
+    public DonDto createDonMaterialThankYou(final DonMaterialRequestDto donMaterialRequestDto) throws Exception {
+
+        final Name name = this.nameAssembler.createName(donMaterialRequestDto.getFirstName(),
+                donMaterialRequestDto.getLastName());
+        final Message message = new Message(name, donMaterialRequestDto.getEmail(),
+                donMaterialRequestDto.getPhoneNumber(), donMaterialRequestDto.getComment());
+
+        final EmailNotification emailNotification = new EmailNotification();
+        emailNotification.setEmailSender(emailSalem);
+        emailNotification.setEmailRecipient(donMaterialRequestDto.getEmail());
+        emailNotification.setCreationDate(LocalDateTime.now());
+
+        final String subject = MessageInformation.REMERCIMENT;
+        final String mesageSend = MessageInformation.formateDonThankYouMessage(message);
+        emailNotification.setSubject(subject);
+        emailNotification.setMessage(mesageSend);
+        emailNotification.setName(name);
+
+        final List<Notification> notifications = new ArrayList<>();
+        notifications.add(emailNotification);
+
+        this.notificationSenderService.send(notifications);
+        return new DonDto();
+    }
+
+    private int convertToCent(final int amount) {
         return amount * 100;
     }
 
-    private void validateCharge(Charge charge) throws StrikeException {
+    private void validateCharge(final Charge charge) throws StrikeException {
         if (charge.getId() == null) {
-            String message = "An error occurred while trying to create a charge.";
+            final String message = "An error occurred while trying to create a charge.";
             throw new StrikeException(message);
         }
     }

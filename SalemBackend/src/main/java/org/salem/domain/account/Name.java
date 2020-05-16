@@ -1,4 +1,4 @@
-package org.salem.domain.don;
+package org.salem.domain.account;
 
 import java.util.Objects;
 

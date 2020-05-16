@@ -62,7 +62,20 @@ export class RequestInformationComponent implements OnInit {
         console.log(error);
         this.updateErrorParamater();
       });
+
+    this.accountService.sendMessageInformation(this.requestInformationDto).subscribe(response => {
+      this.httpStatus = response.httpStatus;
+      if (this.isSend()) {
+        console.log(response);
+      } else {
+      }
+    },
+      error => {
+        console.log(error);
+      });
+
     this.requestInformationDto = new RequestInformationDto();
+
   }
 
   submit() {

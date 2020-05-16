@@ -7,7 +7,7 @@ import org.salem.controller.dto.AccountRequestDto;
 import org.salem.controller.dto.AccountSignInDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.account.AccountRepository;
-import org.salem.domain.don.Name;
+import org.salem.domain.account.Name;
 import org.salem.domain.exception.AccountAlreadyExistException;
 import org.salem.domain.exception.InvalidAccountTypeException;
 import org.salem.domain.exception.ResourceNotFoundException;
@@ -17,6 +17,7 @@ import org.salem.service.dto.AccountDto;
 import org.salem.service.dto.NameDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,7 +39,8 @@ public class AccountService {
     private String secretCryptography;
 
     public AccountService(final AccountFactory accountFactory, final AccountAssembler accountAssembler,
-            final NameAssembler nameAssembler, final AccountRepository accountRepository) {
+            final NameAssembler nameAssembler, final AccountRepository accountRepository,
+            final JavaMailSender javaMailSender) {
         this.accountFactory = accountFactory;
         this.accountAssembler = accountAssembler;
         this.nameAssembler = nameAssembler;
@@ -58,7 +60,7 @@ public class AccountService {
     }
 
     public AccountDto createAccount(final AccountRequestDto accountRequestDto)
-            throws InvalidAccountTypeException, AccountAlreadyExistException {
+            throws InvalidAccountTypeException, AccountAlreadyExistException, Exception {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 
@@ -72,6 +74,17 @@ public class AccountService {
         account.encryptPassword(secretCryptography);
         final Account accountSave = this.accountRepository.save(account);
         final AccountDto accountDto = this.accountAssembler.create(accountSave);
+
+        // Notification emailNotification = new EmailNotification(account.getName(),
+        // LocalDateTime.now(),
+        // "creation de compte", "nous vous remercions pour la creation de compte",
+        // account.getEmail());
+
+        // final List<Notification> notifications = new ArrayList<>();
+
+        // notifications.add(emailNotification);
+
+        // this.notifyAllSenderObserver(notifications);
 
         return accountDto;
     }

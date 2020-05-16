@@ -48,4 +48,18 @@ public class MessageController {
         return ResponseEntity.accepted().body(responseDto);
     }
 
+    @PostMapping(path = "/create/confirmation", produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<ResponseDto> createMessageConfirmation(
+            @RequestBody final @Valid MessageRequestDto messageRequestDto) throws Exception {
+
+        LOGGER.info("Create the message confirmation: " + messageRequestDto.getEmail() + " : " + LOGGER.getName());
+
+        final MessageDto messageDto = messageService.createMessageConfirmation(messageRequestDto);
+        final ResponseDto responseDto = new ResponseDto(HttpStatus.CREATED.toString(), messageDto, new ErrorDetail());
+
+        return ResponseEntity.accepted().body(responseDto);
+    }
+
 }

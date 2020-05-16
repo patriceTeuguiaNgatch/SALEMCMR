@@ -98,6 +98,20 @@ export class DonFinancialComponent implements OnInit {
         console.log(error);
         this.updateErrorParamater();
       });
+
+    this.accountService.createDonFinancialThankYou(this.donFinancialRegistrationDto).subscribe(response => {
+      this.httpStatus = response.httpStatus;
+      if (this.isCreated()) {
+        console.log(response);
+      } else {
+        console.log(response);
+      }
+    },
+      error => {
+
+        console.log(error);
+      });
+
     this.donFinancialRegistrationDto = new DonFinancialRegistrationDto();
 
   }

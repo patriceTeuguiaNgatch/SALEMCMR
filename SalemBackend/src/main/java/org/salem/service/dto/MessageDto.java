@@ -1,14 +1,10 @@
 package org.salem.service.dto;
 
-import java.util.Objects;
-
 public class MessageDto {
 
     private String messageId;
 
-    private String firstName;
-
-    private String lastName;
+    private NameDto nameDto;
 
     private String email;
 
@@ -19,11 +15,9 @@ public class MessageDto {
     public MessageDto() {
     }
 
-    public MessageDto(String messageId, String firstName, String lastName, String email, String phoneNumber,
-            String comment) {
+    public MessageDto(String messageId, NameDto nameDto, String email, String phoneNumber, String comment) {
         this.messageId = messageId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.nameDto = nameDto;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.comment = comment;
@@ -37,20 +31,12 @@ public class MessageDto {
         this.messageId = messageId;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public NameDto getNameDto() {
+        return this.nameDto;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setNameDto(NameDto nameDto) {
+        this.nameDto = nameDto;
     }
 
     public String getEmail() {
@@ -78,28 +64,10 @@ public class MessageDto {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof MessageDto)) {
-            return false;
-        }
-        MessageDto messageDto = (MessageDto) o;
-        return Objects.equals(messageId, messageDto.messageId) && Objects.equals(firstName, messageDto.firstName)
-                && Objects.equals(lastName, messageDto.lastName) && Objects.equals(email, messageDto.email)
-                && Objects.equals(phoneNumber, messageDto.phoneNumber) && Objects.equals(comment, messageDto.comment);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(messageId, firstName, lastName, email, phoneNumber, comment);
-    }
-
-    @Override
     public String toString() {
-        return "{" + " messageId='" + getMessageId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
-                + getLastName() + "'" + ", email='" + getEmail() + "'" + ", phoneNumber='" + getPhoneNumber() + "'"
-                + ", comment='" + getComment() + "'" + "}";
+        return "{" + " messageId='" + getMessageId() + "'" + ", nameDto='" + getNameDto() + "'" + ", email='"
+                + getEmail() + "'" + ", phoneNumber='" + getPhoneNumber() + "'" + ", comment='" + getComment() + "'"
+                + "}";
     }
 
 }

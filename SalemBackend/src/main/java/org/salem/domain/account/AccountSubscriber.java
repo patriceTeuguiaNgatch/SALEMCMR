@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import org.salem.domain.don.Name;
-
 @Entity
 @DiscriminatorValue("subscriber")
 public class AccountSubscriber extends Account {

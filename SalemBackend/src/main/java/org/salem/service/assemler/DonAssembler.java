@@ -9,7 +9,7 @@ import org.salem.controller.dto.DonRequestDto;
 import org.salem.domain.account.Account;
 import org.salem.domain.don.Address;
 import org.salem.domain.don.Don;
-import org.salem.domain.don.Name;
+import org.salem.domain.account.Name;
 import org.salem.domain.dto.DonPersistDto;
 import org.salem.service.dto.AddressDto;
 import org.salem.service.dto.DonAccountDto;

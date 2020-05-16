@@ -51,7 +51,7 @@ public class AccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ResponseDto> createAccountSubscriber(
             @RequestBody final @Valid AccountRequestDto accountRequestDto)
-            throws InvalidAccountTypeException, AccountAlreadyExistException {
+            throws InvalidAccountTypeException, AccountAlreadyExistException, Exception {
 
         LOGGER.info("Create the account : " + accountRequestDto.getFirstName() + " : " + LOGGER.getName());
 

@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.salem.domain.account.Name;
 
 @Entity
 @Table(name = "messages")
@@ -21,11 +24,8 @@ public class Message implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long messageId;
 
-    @Column(name = "firtName", nullable = false)
-    private String firstName;
-
-    @Column(name = "lastName", nullable = false)
-    private String lastName;
+    @Embedded
+    private Name name;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -39,9 +39,8 @@ public class Message implements Serializable {
     public Message() {
     }
 
-    public Message(String firstName, String lastName, String email, String phoneNumber, String comment) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Message(Name name, String email, String phoneNumber, String comment) {
+        this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.comment = comment;
@@ -55,20 +54,12 @@ public class Message implements Serializable {
         this.messageId = messageId;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+    public Name getName() {
+        return this.name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -103,21 +94,20 @@ public class Message implements Serializable {
             return false;
         }
         Message message = (Message) o;
-        return Objects.equals(messageId, message.messageId) && Objects.equals(firstName, message.firstName)
-                && Objects.equals(lastName, message.lastName) && Objects.equals(email, message.email)
-                && Objects.equals(phoneNumber, message.phoneNumber) && Objects.equals(comment, message.comment);
+        return Objects.equals(messageId, message.messageId) && Objects.equals(name, message.name)
+                && Objects.equals(email, message.email) && Objects.equals(phoneNumber, message.phoneNumber)
+                && Objects.equals(comment, message.comment);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(messageId, firstName, lastName, email, phoneNumber, comment);
+        return Objects.hash(messageId, name, email, phoneNumber, comment);
     }
 
     @Override
     public String toString() {
-        return "{" + " messageId='" + getMessageId() + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='"
-                + getLastName() + "'" + ", email='" + getEmail() + "'" + ", phoneNumber='" + getPhoneNumber() + "'"
-                + ", comment='" + getComment() + "'" + "}";
+        return "{" + " messageId='" + getMessageId() + "'" + ", name='" + getName() + "'" + ", email='" + getEmail()
+                + "'" + ", phoneNumber='" + getPhoneNumber() + "'" + ", comment='" + getComment() + "'" + "}";
     }
 
 }

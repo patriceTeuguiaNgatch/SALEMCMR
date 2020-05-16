@@ -1,6 +1,7 @@
 package org.salem.domain.account;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -29,7 +30,9 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.salem.domain.don.Don;
-import org.salem.domain.don.Name;
+import org.salem.domain.message.EmailNotification;
+import org.salem.domain.message.Notification;
+import org.salem.domain.message.SmsNotification;
 
 @Entity
 @Table(name = "accounts")
@@ -179,6 +182,16 @@ public class Account implements Serializable {
 
     private String decryptPassword(String secret) {
         return AdvancedEncryption.decrypt(this.password, secret);
+    }
+
+    public Notification createEmailNotification(String subject, String message, String emailRecipient) {
+
+        return new EmailNotification(this.name, LocalDateTime.now(), subject, message, this.email, emailRecipient);
+    }
+
+    public Notification createSmsNotification(String subject, String message) {
+
+        return new SmsNotification(this.name, LocalDateTime.now(), subject, message, this.phoneNumber);
     }
 
     @Override

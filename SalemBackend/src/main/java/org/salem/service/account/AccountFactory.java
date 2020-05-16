@@ -9,19 +9,25 @@ import org.salem.domain.account.AccountAdministrator;
 import org.salem.domain.account.AccountModerator;
 import org.salem.domain.account.AccountSubscriber;
 import org.salem.domain.account.ERole;
+import org.salem.domain.account.Name;
 import org.salem.domain.account.Role;
-import org.salem.domain.don.Name;
 import org.salem.domain.exception.InvalidAccountTypeException;
+import org.salem.service.assemler.NameAssembler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AccountFactory {
 
+    @Autowired
+    private NameAssembler nameAssembler;
+
     private ERole eRoleSubscriber = ERole.ROLE_SUBSCRIBER;
     private ERole eRoleModerator = ERole.ROLE_MODERATOR;
     private ERole eRoleAdmistrator = ERole.ROLE_ADMINISTRATOR;
 
-    public AccountFactory() {
+    public AccountFactory(NameAssembler nameAssembler) {
+        this.nameAssembler = nameAssembler;
 
     }
 
@@ -38,7 +44,8 @@ public class AccountFactory {
         String password = accountRequestDto.getPassword();
         String email = accountRequestDto.getEmail();
         String phoneNumber = accountRequestDto.getPhoneNumber();
-        Name name = new Name(firstName, lastName);
+
+        Name name = this.nameAssembler.createName(firstName, lastName);
 
         if (role.equals(eRoleSubscriber.toString())) {
             setRoles.add(roleVolunteer);
