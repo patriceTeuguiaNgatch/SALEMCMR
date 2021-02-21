@@ -6,4 +6,4 @@
 
 ## Contributeurs
 
-    - Patrice Teuguia: pateuguia@gmail.com
+    - Patrice Teuguia N.: pateuguia@gmail.com
